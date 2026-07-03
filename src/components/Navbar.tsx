@@ -50,9 +50,9 @@ export function Navbar() {
             <Image
               src="/logo.png"
               alt="Ares Reformas"
-              width={40}
-              height={40}
-              className="h-10 w-auto transition-transform group-hover:scale-110"
+              width={60}
+              height={60}
+              className="h-14 w-auto transition-transform group-hover:scale-110"
             />
             <span className="text-xl font-black text-white tracking-tight hidden sm:block">
               ARES
