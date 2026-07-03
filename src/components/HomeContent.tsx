@@ -8,34 +8,29 @@ import { Button } from "./Button";
 
 const services = [
   {
-    title: "Reformas Integrales",
-    desc: "Transformamos tu hogar de principio a fin. Cocinas, baños, salones y dormitorios con acabados de primera calidad.",
-    icon: "🏠",
+    title: "Baños y Cocinas",
+    desc: "Diseño y reforma integral. Platos de ducha, bañeras exentas, muebles a medida, encimeras de cuarzo/silestone, grifería de diseño.",
+    icon: "🚿🍳",
   },
   {
-    title: "Cocinas",
-    desc: "Diseñamos y ejecutamos cocinas modernas y funcionales con materiales premium y electrodomésticos eficientes.",
-    icon: "🍳",
+    title: "Alicatados y Solados",
+    desc: "Cerámica, porcelánico, gres, piedra natural. Grandes formatos, rectificados, juntas mínimas. Suelos radiantes.",
+    icon: "🧱",
   },
   {
-    title: "Baños",
-    desc: "Reformamos baños con diseño contemporáneo, platos de ducha, bañeras exentas y revestimientos exclusivos.",
-    icon: "🚿",
-  },
-  {
-    title: "Rehabilitación",
-    desc: "Rehabilitación de edificios completos, fachadas, cubiertas y comunidades con todas las licencias y garantías.",
+    title: "Pladur y Falsos Techos",
+    desc: "Tabiquería seca, trasdosados, techos registrables, aislamiento acústico/térmico, techos decorativos con iluminación integrada.",
     icon: "🏗️",
   },
   {
-    title: "Diseño de Interiores",
-    desc: "Servicio integral de interiorismo. Te ayudamos a elegir materiales, colores y mobiliario para cada espacio.",
+    title: "Pintura Interior",
+    desc: "Pintura lisa, estucos, efectos decorativos, esmaltado de carpintería, lacado de puertas, tratamiento antihumedad, pintura ecológica.",
     icon: "🎨",
   },
   {
-    title: "Eficiencia Energética",
-    desc: "Mejoramos el aislamiento térmico y acústico. Instalamos sistemas de climatización eficientes y placas solares.",
-    icon: "⚡",
+    title: "Reformas Completas y Parciales",
+    desc: "Gestión integral: demoliciones, fontanería, electricidad, carpintería, acabados. Un solo interlocutor, plazos cumplidos, garantía 5 años.",
+    icon: "🏠",
   },
 ];
 
@@ -159,7 +154,7 @@ export function HomeContent() {
             </h2>
             <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
               Ofrecemos soluciones completas para tu hogar o negocio. 
-              Desde reformas integrales hasta diseño de interiores.
+              Desde reformas integrales hasta trabajos especializados.
             </p>
           </AnimatedSection>
 

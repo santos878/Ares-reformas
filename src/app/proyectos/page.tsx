@@ -5,18 +5,45 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
+import { BeforeAfter, BeforeAfterGrid } from "@/components/BeforeAfter";
 import { HiArrowRight } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 
-const categories = ["Todos", "Reforma Integral", "Cocina", "Baño", "Rehabilitación", "Interiorismo"];
+const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
 const projects = [
-  { title: "Ático dúplex con terraza", category: "Reforma Integral", location: "Salamanca, Madrid", area: "120m²", desc: "Reforma integral de ático con vistas panorámicas. Se unificaron espacios, se añadió una terraza con jardín vertical y se instaló un sistema de domótica avanzada." },
-  { title: "Cocina abierta minimalista", category: "Cocina", location: "Chamberí, Madrid", area: "25m²", desc: "Cocina abierta al salón con isla central, encimera de cuarzo blanco, electrodomésticos integrados y armarios lacados en negro mate." },
-  { title: "Baño spa con drench", category: "Baño", location: "Retiro, Madrid", area: "12m²", desc: "Baño principal con plato de ducha a ras de suelo, mampara minimalista, bañera exenta y revestimiento porcelánico efecto mármol." },
-  { title: "Rehabilitación fachada histórica", category: "Rehabilitación", location: "Centro, Madrid", area: "450m²", desc: "Rehabilitación completa de fachada protegida. Restauración de balcones de forja, limpieza de piedra natural y mejora de aislamiento térmico." },
-  { title: "Oficina corporativa", category: "Interiorismo", location: "Tetuán, Madrid", area: "200m²", desc: "Diseño de oficina abierta con zonas de coworking, cabinas insonorizadas, sala de reuniones ejecutiva y área de descanso con café." },
-  { title: "Casa rural sostenible", category: "Reforma Integral", location: "Sierra de Madrid", area: "180m²", desc: "Reforma de casa rural con criterios de bioconstrucción. Materiales naturales, aislamiento de corcho, calefacción por suelo radiante y recuperación de aguas pluviales." },
+  { title: "Baño moderno + Cocina abierta", category: "Baños y Cocinas", location: "Bilbao", area: "35m²", desc: "Reforma completa: plato de ducha, mueble suspendido, cocina con isla y encimera silestone.", image: "/projects/bano-cocina.jpg" },
+  { title: "Porcelánico gran formato salón", category: "Alicatados y Solados", location: "Donostia", area: "60m²", desc: "Suelo porcelánico 120x120 rectificado, junta 1mm, zócalo a ras. Calefacción radiante.", image: "/projects/solado.jpg" },
+  { title: "Falso techo iluminación LED", category: "Pladur y Techos", location: "Vitoria", area: "45m²", desc: "Techo registrable con downlights LED dimables, aislamiento acústico lana roca.", image: "/projects/techo.jpg" },
+  { title: "Estuco veneciano dormitorio", category: "Pintura", location: "Getxo", area: "20m²", desc: "Paredes en estuco veneciano brillo perlado, techo blanco mate, lacado puertas.", image: "/projects/pintura.jpg" },
+  { title: "Reforma integral piso 90m²", category: "Reformas Integrales", location: "Barakaldo", area: "90m²", desc: "Redistribución completa: 3 hab, 2 baños, cocina office, suelos, pintura, carpintería.", image: "/projects/integral.jpg" },
+];
+
+const beforeAfterItems = [
+  {
+    title: "Baño años 90 → Spa moderno",
+    category: "Baños y Cocinas",
+    beforeSrc: "https://picsum.photos/seed/bano-antes/800/600.jpg",
+    afterSrc: "https://picsum.photos/seed/bano-despues/800/600.jpg",
+  },
+  {
+    title: "Cocina cerrada → Open concept",
+    category: "Baños y Cocinas",
+    beforeSrc: "https://picsum.photos/seed/cocina-antes/800/600.jpg",
+    afterSrc: "https://picsum.photos/seed/cocina-despues/800/600.jpg",
+  },
+  {
+    title: "Suelo gres viejo → Porcelánico 120x120",
+    category: "Alicatados y Solados",
+    beforeSrc: "https://picsum.photos/seed/suelo-antes/800/600.jpg",
+    afterSrc: "https://picsum.photos/seed/suelo-despues/800/600.jpg",
+  },
+  {
+    title: "Techo popcorn → LED integrado",
+    category: "Pladur y Techos",
+    beforeSrc: "https://picsum.photos/seed/techo-antes/800/600.jpg",
+    afterSrc: "https://picsum.photos/seed/techo-despues/800/600.jpg",
+  },
 ];
 
 export default function ProyectosPage() {
@@ -81,15 +108,17 @@ export default function ProyectosPage() {
                     whileHover={{ y: -6 }}
                     className="group h-full rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 overflow-hidden"
                   >
-                    <div className="aspect-[16/10] bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                      <span className="text-6xl opacity-50">🏗️</span>
+                    <div className="aspect-[16/10] bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <span className="absolute bottom-4 left-4 text-white font-medium">
+                        {project.area}
+                      </span>
                     </div>
                     <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="text-xs font-semibold text-red-500 bg-red-500/10 px-3 py-1 rounded-full">
                           {project.category}
                         </span>
-                        <span className="text-xs text-gray-500">{project.area}</span>
                       </div>
                       <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
                         {project.title}
@@ -113,6 +142,8 @@ export default function ProyectosPage() {
           </AnimatedSection>
         </div>
       </section>
+
+      <BeforeAfterGrid items={beforeAfterItems} />
     </>
   );
 }

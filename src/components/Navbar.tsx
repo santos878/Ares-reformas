@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
@@ -46,10 +47,17 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-black text-white tracking-tight">
+            <Image
+              src="/logo.png"
+              alt="Ares Reformas"
+              width={40}
+              height={40}
+              className="h-10 w-auto transition-transform group-hover:scale-110"
+            />
+            <span className="text-xl font-black text-white tracking-tight hidden sm:block">
               ARES
             </span>
-            <span className="text-2xl font-light text-red-500 group-hover:text-red-400 transition-colors">
+            <span className="text-xl font-light text-red-500 group-hover:text-red-400 transition-colors hidden sm:block">
               Reformas
             </span>
           </Link>

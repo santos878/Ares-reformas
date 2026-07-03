@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SoundToggle } from "@/components/SoundToggle";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -83,6 +84,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <SoundToggle />
+        <WhatsAppFloat />
       </body>
     </html>
   );
