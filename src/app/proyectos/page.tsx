@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
 const projects = [
-  { title: "Baño moderno + Cocina abierta", category: "Baños y Cocinas", location: "Bilbao", area: "35m²", desc: "Reforma completa: plato de ducha, mueble suspendido, cocina con isla y encimera silestone.", image: "/projects/bano-cocina.jpg" },
-  { title: "Porcelánico gran formato salón", category: "Alicatados y Solados", location: "Donostia", area: "60m²", desc: "Suelo porcelánico 120x120 rectificado, junta 1mm, zócalo a ras. Calefacción radiante.", image: "/projects/solado.jpg" },
-  { title: "Falso techo iluminación LED", category: "Pladur y Techos", location: "Vitoria", area: "45m²", desc: "Techo registrable con downlights LED dimables, aislamiento acústico lana roca.", image: "/projects/techo.jpg" },
-  { title: "Estuco veneciano dormitorio", category: "Pintura", location: "Getxo", area: "20m²", desc: "Paredes en estuco veneciano brillo perlado, techo blanco mate, lacado puertas.", image: "/projects/pintura.jpg" },
-  { title: "Reforma integral piso 90m²", category: "Reformas Integrales", location: "Barakaldo", area: "90m²", desc: "Redistribución completa: 3 hab, 2 baños, cocina office, suelos, pintura, carpintería.", image: "/projects/integral.jpg" },
+  { title: "Baño moderno + Cocina abierta", category: "Baños y Cocinas", location: "Bilbao", area: "35m²", desc: "Reforma completa: plato de ducha, mueble suspendido, cocina con isla y encimera silestone.", image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=800" },
+  { title: "Porcelánico gran formato salón", category: "Alicatados y Solados", location: "Donostia", area: "60m²", desc: "Suelo porcelánico 120x120 rectificado, junta 1mm, zócalo a ras. Calefacción radiante.", image: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?q=80&w=800" },
+  { title: "Falso techo iluminación LED", category: "Pladur y Techos", location: "Vitoria", area: "45m²", desc: "Techo registrable con downlights LED dimables, aislamiento acústico lana roca.", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800" },
+  { title: "Estuco veneciano dormitorio", category: "Pintura", location: "Getxo", area: "20m²", desc: "Paredes en estuco veneciano brillo perlado, techo blanco mate, lacado puertas.", image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800" },
+  { title: "Reforma integral piso 90m²", category: "Reformas Integrales", location: "Barakaldo", area: "90m²", desc: "Redistribución completa: 3 hab, 2 baños, cocina office, suelos, pintura, carpintería.", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800" },
 ];
 
 const beforeAfterItems = [
@@ -108,8 +108,11 @@ export default function ProyectosPage() {
                     whileHover={{ y: -6 }}
                     className="group h-full rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 overflow-hidden"
                   >
-                    <div className="aspect-[16/10] bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div
+                      className="aspect-[16/10] bg-cover bg-center bg-no-repeat relative overflow-hidden"
+                      style={{ backgroundImage: `url('${project.image}')` }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                       <span className="absolute bottom-4 left-4 text-white font-medium">
                         {project.area}
                       </span>
