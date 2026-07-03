@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect, useCallback } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface BeforeAfterProps {
@@ -66,61 +65,50 @@ export function BeforeAfter({
       )}
       <div
         ref={containerRef}
-        className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-900 cursor-ew-resize"
+        className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-900 cursor-ew-resize select-none"
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
       >
-        <div className="absolute inset-0">
-          <Image
-            src={beforeSrc}
-            alt={beforeAlt}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
+        {/* Before image (full width, bottom layer) */}
         <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-        >
-          <Image
-            src={afterSrc}
-            alt={afterAlt}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${beforeSrc}')` }}
+          role="img"
+          aria-label={beforeAlt}
+        />
+        {/* After image (clipped, top layer) */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${afterSrc}')`,
+            clipPath: `inset(0 ${100 - position}% 0 0)`,
+          }}
+          role="img"
+          aria-label={afterAlt}
+        />
+        {/* Divider line */}
         <motion.div
-          className="absolute top-0 bottom-0 w-1 bg-white/80 shadow-lg shadow-red-600/50 pointer-events-none flex items-center justify-center"
+          className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)] pointer-events-none flex items-center justify-center z-10"
           style={{ left: `${position}%`, transform: "translateX(-50%)" }}
-          animate={{ scaleY: [1, 1.05, 1] }}
+          animate={{ scaleY: [1, 1.03, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
-            <motion.svg
-              className="w-3 h-3 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              animate={{ rotate: [0, 180, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </motion.svg>
+          <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+            </svg>
           </div>
         </motion.div>
-        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-medium text-white">
+        {/* Labels */}
+        <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider z-10">
           Antes
         </div>
-        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-medium text-white">
+        <div className="absolute top-4 right-4 bg-red-600/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider z-10">
           Después
         </div>
       </div>
-      <div className="flex justify-center gap-4 mt-6 text-sm text-gray-500">
-        <span>Arrastra el control ↕</span>
+      <div className="flex justify-center mt-4 text-sm text-gray-500">
+        <span>← Arrastra para comparar →</span>
       </div>
     </div>
   );
