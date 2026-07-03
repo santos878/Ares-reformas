@@ -23,14 +23,14 @@ const beforeAfterItems = [
   {
     title: "Baño años 90 → Spa moderno",
     category: "Baños y Cocinas",
-    beforeSrc: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=800",
+    beforeSrc: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800",
     afterSrc: "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800",
   },
   {
     title: "Cocina cerrada → Open concept",
     category: "Baños y Cocinas",
-    beforeSrc: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800",
-    afterSrc: "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?q=80&w=800",
+    beforeSrc: "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=800",
+    afterSrc: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800",
   },
   {
     title: "Suelo gris viejo → Porcelánico 120x120",
@@ -39,7 +39,7 @@ const beforeAfterItems = [
     afterSrc: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=800",
   },
   {
-    title: "Techo popcorn → LED integrado",
+    title: "Techo viejo → LED integrado",
     category: "Pladur y Techos",
     beforeSrc: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800",
     afterSrc: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800",
