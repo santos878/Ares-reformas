@@ -23,26 +23,26 @@ const beforeAfterItems = [
   {
     title: "Baño años 90 → Spa moderno",
     category: "Baños y Cocinas",
-    beforeSrc: "https://picsum.photos/seed/bano-antes/800/600.jpg",
-    afterSrc: "https://picsum.photos/seed/bano-despues/800/600.jpg",
+    beforeSrc: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=800",
+    afterSrc: "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800",
   },
   {
     title: "Cocina cerrada → Open concept",
     category: "Baños y Cocinas",
-    beforeSrc: "https://picsum.photos/seed/cocina-antes/800/600.jpg",
-    afterSrc: "https://picsum.photos/seed/cocina-despues/800/600.jpg",
+    beforeSrc: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800",
+    afterSrc: "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?q=80&w=800",
   },
   {
     title: "Suelo gres viejo → Porcelánico 120x120",
     category: "Alicatados y Solados",
-    beforeSrc: "https://picsum.photos/seed/suelo-antes/800/600.jpg",
-    afterSrc: "https://picsum.photos/seed/suelo-despues/800/600.jpg",
+    beforeSrc: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800",
+    afterSrc: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=800",
   },
   {
     title: "Techo popcorn → LED integrado",
     category: "Pladur y Techos",
-    beforeSrc: "https://picsum.photos/seed/techo-antes/800/600.jpg",
-    afterSrc: "https://picsum.photos/seed/techo-despues/800/600.jpg",
+    beforeSrc: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800",
+    afterSrc: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800",
   },
 ];
 
