@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi2";
 import { AnimatedSection } from "./AnimatedSection";
 import { Button } from "./Button";
@@ -53,6 +54,22 @@ export function HomeContent() {
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 150 }}
+            className="mb-6"
+          >
+            <Image
+              src="/logo.png"
+              alt="Ares Reformas"
+              width={120}
+              height={120}
+              className="mx-auto"
+              priority
+            />
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
