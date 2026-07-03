@@ -64,8 +64,8 @@ export function HomeContent() {
             <Image
               src="/logo.png"
               alt="Ares Reformas"
-              width={120}
-              height={120}
+              width={180}
+              height={180}
               className="mx-auto"
               priority
             />
