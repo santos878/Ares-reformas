@@ -33,7 +33,7 @@ const beforeAfterItems = [
     afterSrc: "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?q=80&w=800",
   },
   {
-    title: "Suelo gres viejo → Porcelánico 120x120",
+    title: "Suelo gris viejo → Porcelánico 120x120",
     category: "Alicatados y Solados",
     beforeSrc: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800",
     afterSrc: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=800",
