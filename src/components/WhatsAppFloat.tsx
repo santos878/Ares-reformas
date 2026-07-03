@@ -24,7 +24,7 @@ export function WhatsAppFloat() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50"
+      className="fixed bottom-6 left-6 z-50"
       style={{ opacity }}
       initial={{ scale: 0, rotate: -90 }}
       animate={{ scale: 1, rotate: 0 }}
