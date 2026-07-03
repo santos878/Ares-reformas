@@ -4,129 +4,211 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
+import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight } from "react-icons/hi2";
 
-const team = [
-  { name: "Carlos Martínez", role: "CEO & Fundador", desc: "20 años de experiencia en el sector de la construcción y rehabilitación." },
-  { name: "Laura García", role: "Directora de Diseño", desc: "Arquitecta de interiores con premios nacionales de diseño." },
-  { name: "Miguel Torres", role: "Director de Obra", desc: "Ingeniero civil, supervisor de más de 300 proyectos." },
-  { name: "Ana Ruiz", role: "Responsable de Calidad", desc: "Garantiza que cada proyecto cumpla los más altos estándares." },
+const reasons = [
+  {
+    icon: HiShieldCheck,
+    title: "Garantía 5 años",
+    desc: "Respondemos por nuestro trabajo. Si algo falla, lo arreglamos sin coste.",
+  },
+  {
+    icon: HiClock,
+    title: "Plazos reales",
+    desc: "Planificamos cada fase. Cumplimos fechas porque no improvisamos.",
+  },
+  {
+    icon: HiHeart,
+    title: "Un solo interlocutor",
+    desc: "Tienes un jefe de obra dedicado. Sin derivaciones, sin excusas.",
+  },
+  {
+    icon: HiSparkles,
+    title: "Materiales premium",
+    desc: "Solo trabajamos con primeras marcas: Porcelanosa, Silestone, Grohe, Roca...",
+  },
+  {
+    icon: HiCheckCircle,
+    title: "Presupuesto cerrado",
+    desc: "El precio que firmas es el que pagas. Sin sorpresas ni extras ocultos.",
+  },
+  {
+    icon: HiStar,
+    title: "Limpieza diaria",
+    desc: "Dejamos tu casa habitable cada día. Polvo y escombros, fuera.",
+  },
 ];
 
-const timeline = [
-  { year: "2010", event: "Fundación de Ares Reformas" },
-  { year: "2013", event: "Primer gran proyecto: rehabilitación de edificio histórico" },
-  { year: "2016", event: "Apertura de showroom en Madrid" },
-  { year: "2019", event: "Premio a la mejor reforma del año" },
-  { year: "2022", event: "Expansión a toda la Comunidad de Madrid" },
-  { year: "2024", event: "+250 proyectos completados con éxito" },
+const testimonials = [
+  {
+    name: "María González",
+    location: "Bilbao",
+    project: "Reforma integral + cocina",
+    rating: 5,
+    text: "Transformaron mi piso de los 90 en una casa moderna y luminosa. El trato fue impecable: cumplieron plazos, presupuesto cerrado y la limpieza diaria se nota. El jefe de obra, Miguel, siempre disponible. 100% recomendables.",
+  },
+  {
+    name: "Iñaki Ruiz",
+    location: "Donostia",
+    project: "Baño completo + alicatado",
+    rating: 5,
+    text: "Quería un baño tipo spa y lo lograron. Platos de ducha a ras, mampara minimalista, grifería Grohe... El detalle del zócalo a ras de pared marca la diferencia. Profesionales de verdad, no chapuzas.",
+  },
+  {
+    name: "Laura Mendizabal",
+    location: "Getxo",
+    project: "Pintura decorativa + falsos techos",
+    rating: 5,
+    text: "Hicieron estuco veneciano en el dormitorio principal y techo con LED integrado. El acabado es de revista. Lo mejor: presupuesto cerrado, sin sorpresas, y dejaron todo impoluto. Volveré a contar con ellos.",
+  },
+  {
+    name: "Jon Ander López",
+    location: "Barakaldo",
+    project: "Reforma parcial + suelo radiante",
+    rating: 5,
+    text: "Reforma de salón, cocina y 2 baños con suelo radiante. Coordinaron fontanería, electricidad y carpintería sin que yo tuviera que gestionar nada. Plazo: 6 semanas, cumplido al día. Equipo serio.",
+  },
+  {
+    name: "Ane Soriano",
+    location: "Portugalete",
+    project: "Cocina abierta + isla",
+    rating: 5,
+    text: "Nos asesoraron en la distribución y elección de materiales (Silestone, muebles Santos, electrodomésticos Bosch). La isla central es el corazón de la casa. Trato cercano, profesional y transparente.",
+  },
+  {
+    name: "Carlos Fernández",
+    location: "Santurtzi",
+    project: "Rehabilitación fachada + aislamiento",
+    rating: 5,
+    text: "Comunidad de 12 vecinos. Rehabilitaron fachada, balcones y aislaron térmicamente. Gestionaron subvenciones, ITE y licencias. Resultado: edificio como nuevo y factura de calefacción bajada un 30%.",
+  },
 ];
 
 export default function NosotrosPage() {
   return (
     <>
+      {/* Hero */}
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-red-600/10 via-transparent to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.08),transparent_70%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block px-4 py-1.5 bg-red-600/20 border border-red-600/30 rounded-full text-red-400 text-sm font-semibold tracking-wider uppercase mb-6"
+          >
+            Ares Reformas
+          </motion.span>
           <AnimatedText
-            text="Sobre Nosotros"
-            className="text-5xl sm:text-6xl font-black text-white text-center"
+            text="Por qué elegirnos"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95]"
             as="h1"
           />
-          <AnimatedSection delay={0.2}>
-            <p className="text-gray-400 text-lg mt-6 max-w-3xl mx-auto text-center">
-              Desde 2010, transformamos espacios con pasión y profesionalidad. 
-              Cada proyecto es único y recibe la atención que merece.
+          <AnimatedSection delay={0.3} className="mt-6 max-w-3xl mx-auto">
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Más de 15 años transformando hogares en País Vasco. 
+              Profesionales que cumplen lo que prometen.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-            <AnimatedSection variant="left">
-              <h2 className="text-3xl sm:text-4xl font-black text-white mb-6">
-                Nuestra <span className="text-red-500">historia</span>
-              </h2>
-              <div className="space-y-4 text-gray-400 leading-relaxed">
-                <p>
-                  Ares Reformas nació en 2010 con una idea clara: ofrecer reformas de calidad 
-                  con un trato cercano y transparente. Lo que empezó como un pequeño taller 
-                  familiar se ha convertido en una empresa de referencia en Madrid.
-                </p>
-                <p>
-                  Hoy somos un equipo de más de 30 profesionales: arquitectos, diseñadores, 
-                  ingenieros y artesanos que trabajan coordinados para ofrecer resultados 
-                  excepcionales en cada proyecto.
-                </p>
-                <p>
-                  Nuestro secreto es simple: escuchamos, planificamos y ejecutamos con 
-                  la misma dedicación que si fuera nuestra propia casa.
-                </p>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection variant="right">
-              <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center">
-                  <span className="text-8xl">🏢</span>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-red-600/20 rounded-full blur-3xl" />
-              </div>
-            </AnimatedSection>
-          </div>
-
+      {/* Why Choose Us */}
+      <section className="pb-24 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(220,38,38,0.06),transparent_60%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Nuestro <span className="text-red-500">equipo</span>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
+              Razones para <span className="text-red-500">confiar en nosotros</span>
             </h2>
-            <p className="text-gray-400">Los profesionales que harán realidad tu proyecto</p>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              No somos los más baratos. Somos los que entregan lo que firman.
+            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
-            {team.map((member, i) => (
-              <AnimatedSection key={member.name} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 text-center"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {reasons.map((reason, i) => (
+              <AnimatedSection key={reason.title} delay={i * 0.08} variant="up">
+                <motion.article
+                  whileHover={{ y: -8 }}
+                  className="group relative h-full p-8 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-600 to-red-800 mx-auto mb-4 flex items-center justify-center text-2xl font-black text-white">
-                    {member.name.charAt(0)}
+                  <div className="absolute inset-0 bg-gradient-to-t from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10 flex flex-col h-full">
+                    <motion.div
+                      className="w-14 h-14 bg-red-600/20 rounded-xl flex items-center justify-center mb-6 text-red-400 group-hover:bg-red-600 group-hover:text-white transition-all duration-300"
+                    >
+                      <reason.icon size={28} />
+                    </motion.div>
+                    <h3 className="text-xl font-black text-white mb-3 group-hover:text-red-400 transition-colors">
+                      {reason.title}
+                    </h3>
+                    <p className="text-gray-400 leading-relaxed flex-1">
+                      {reason.desc}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-bold text-white">{member.name}</h3>
-                  <p className="text-red-400 text-sm font-medium mt-1">{member.role}</p>
-                  <p className="text-gray-500 text-sm mt-3">{member.desc}</p>
-                </motion.div>
+                </motion.article>
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
 
+      {/* Testimonials */}
+      <section className="relative py-24">
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600/5 to-transparent" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Nuestra <span className="text-red-500">trayectoria</span>
+            <span className="text-red-500 font-semibold tracking-[0.3em] uppercase text-sm">
+              Testimonios reales
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mt-4">
+              Lo que dicen <span className="text-red-500">nuestros clientes</span>
             </h2>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              Más de 250 proyectos. Estas son algunas voces.
+            </p>
           </AnimatedSection>
 
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-800" />
-            <div className="space-y-12">
-              {timeline.map((item, i) => (
-                <AnimatedSection key={item.year} delay={i * 0.1}>
-                  <div className="relative pl-12">
-                    <div className="absolute left-2 top-1 w-5 h-5 rounded-full bg-red-600 border-4 border-black" />
-                    <span className="text-red-500 font-black text-xl">{item.year}</span>
-                    <p className="text-gray-400 mt-1">{item.event}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, i) => (
+              <AnimatedSection key={testimonial.name} delay={i * 0.08} variant="up">
+                <motion.article
+                  whileHover={{ y: -6 }}
+                  className="h-full p-8 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/30 transition-all duration-500 flex flex-col"
+                >
+                  <div className="flex items-center gap-1 mb-4">
+                    {Array.from({ length: testimonial.rating }).map((_, idx) => (
+                      <HiStar key={idx} className="text-yellow-400" size={20} />
+                    ))}
                   </div>
-                </AnimatedSection>
-              ))}
-            </div>
+                  <p className="text-gray-300 leading-relaxed mb-6 flex-1">
+                    "{testimonial.text}"
+                  </p>
+                  <div className="border-t border-gray-800 pt-4">
+                    <p className="font-bold text-white">{testimonial.name}</p>
+                    <p className="text-gray-500 text-sm">{testimonial.location} · {testimonial.project}</p>
+                  </div>
+                </motion.article>
+              </AnimatedSection>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <AnimatedSection className="text-center mt-24">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-6">
-              ¿Hablamos de tu proyecto?
+      {/* CTA */}
+      <section className="relative py-24">
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-transparent" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center">
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
+              ¿Empezamos tu proyecto?
             </h2>
-            <Button size="lg" onClick={() => window.location.href = "/contacto"}>
-              Contacta con nosotros
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+              Presupuesto detallado en 24h. Sin compromiso. Garantía 5 años.
+            </p>
+            <Button size="lg" onClick={() => window.location.href = "/presupuesto"}>
+              Solicitar Presupuesto <HiArrowRight className="ml-2" />
             </Button>
           </AnimatedSection>
         </div>
