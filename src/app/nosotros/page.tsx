@@ -4,38 +4,23 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
-import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight } from "react-icons/hi2";
+import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight, HiMapPin, HiPhone } from "react-icons/hi2";
 
 const reasons = [
   {
-    icon: HiShieldCheck,
-    title: "Trabajo garantizado",
-    desc: "Respondemos por nuestro trabajo. Si algo falla, lo arreglamos sin coste.",
-  },
-  {
-    icon: HiClock,
-    title: "Plazos reales",
-    desc: "Planificamos cada fase. Cumplimos fechas porque no improvisamos.",
-  },
-  {
-    icon: HiHeart,
-    title: "Un solo interlocutor",
-    desc: "Tienes un jefe de obra dedicado. Sin derivaciones, sin excusas.",
-  },
-  {
-    icon: HiSparkles,
-    title: "Materiales",
-    desc: "Trabajamos con primeras marcas: Porcelanosa, Silestone, Grohe, Roca...",
-  },
-  {
-    icon: HiCheckCircle,
-    title: "Presupuesto cerrado",
-    desc: "El precio que firmas es el que pagas. Sin sorpresas ni extras ocultos.",
-  },
-  {
     icon: HiStar,
-    title: "Limpieza diaria",
-    desc: "Dejamos tu casa habitable cada día. Polvo y escombros, fuera.",
+    title: "Equipo experimentado",
+    desc: "Profesionales con más de 15 años de oficio. Sabemos lo que hacemos.",
+  },
+  {
+    icon: HiPhone,
+    title: "Disponibilidad total",
+    desc: "Te atendemos cuando nos necesites. Respuesta rápida, siempre localizables.",
+  },
+  {
+    icon: HiMapPin,
+    title: "Todo el País Vasco",
+    desc: "Trabajamos en Araba, Bizkaia y Gipuzkoa. Estamos donde estés.",
   },
 ];
 
