@@ -39,25 +39,25 @@ export default function ContactoPage() {
               <div className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800">
                 <h3 className="text-lg font-bold text-white mb-4">Información de contacto</h3>
                 <div className="space-y-4">
-                  <a href="tel:+34900123456" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
+                  <a href="tel:+34623293274" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
                     <HiPhone className="text-red-500 mt-1 flex-shrink-0" size={20} />
                     <div>
                       <p className="text-sm font-medium text-white">Teléfono</p>
-                      <p className="text-sm">900 123 456</p>
+                      <p className="text-sm">623 29 32 74</p>
                     </div>
                   </a>
-                  <a href="mailto:info@aresreformas.com" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
+                  <a href="mailto:aaresreformas@gmail.com" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
                     <HiEnvelope className="text-red-500 mt-1 flex-shrink-0" size={20} />
                     <div>
                       <p className="text-sm font-medium text-white">Email</p>
-                      <p className="text-sm">info@aresreformas.com</p>
+                      <p className="text-sm">aaresreformas@gmail.com</p>
                     </div>
                   </a>
                   <div className="flex items-start gap-3 text-gray-400">
                     <HiMapPin className="text-red-500 mt-1 flex-shrink-0" size={20} />
                     <div>
                       <p className="text-sm font-medium text-white">Dirección</p>
-                      <p className="text-sm">Calle Mayor, 15<br />28001 Madrid</p>
+                      <p className="text-sm">País Vasco</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 text-gray-400">

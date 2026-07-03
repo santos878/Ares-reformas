@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aresreformas.com/sitemap.xml
+Sitemap: https://ares-reformas.vercel.app/sitemap.xml

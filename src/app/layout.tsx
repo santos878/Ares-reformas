@@ -19,13 +19,13 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ares Reformas | Reformas Integrales en Madrid",
+    default: "Ares Reformas | Reformas Integrales en País Vasco",
     template: "%s | Ares Reformas",
   },
   description:
-    "Empresa de reformas integrales en Madrid. Transformamos hogares y locales con diseño, calidad y profesionalidad. Solicita presupuesto gratuito.",
+    "Empresa de reformas integrales en País Vasco. Transformamos hogares y locales con diseño, calidad y profesionalidad. Solicita presupuesto gratuito.",
   keywords: [
-    "reformas Madrid",
+    "reformas País Vasco",
     "reformas integrales",
     "empresa de reformas",
     "cocinas",
@@ -36,15 +36,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Ares Reformas" }],
   creator: "Ares Reformas",
   publisher: "Ares Reformas",
-  metadataBase: new URL("https://aresreformas.com"),
+  metadataBase: new URL("https://ares-reformas.vercel.app"),
   openGraph: {
     type: "website",
     locale: "es_ES",
     siteName: "Ares Reformas",
-    title: "Ares Reformas | Reformas Integrales en Madrid",
+    title: "Ares Reformas | Reformas Integrales en País Vasco",
     description:
       "Transformamos hogares y locales con diseño, calidad y profesionalidad.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -75,7 +74,7 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
       <head>
-        <link rel="canonical" href="https://aresreformas.com" />
+        <link rel="canonical" href="https://ares-reformas.vercel.app" />
         <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white">

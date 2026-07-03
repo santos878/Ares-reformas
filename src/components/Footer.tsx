@@ -25,17 +25,17 @@ export function Footer() {
           <AnimatedSection delay={0.1}>
             <h3 className="text-white font-bold text-lg mb-4">Contacto</h3>
             <div className="space-y-3">
-              <a href="tel:+34900123456" className="flex items-center gap-3 text-gray-400 hover:text-red-400 transition-colors text-sm">
+              <a href="tel:+34623293274" className="flex items-center gap-3 text-gray-400 hover:text-red-400 transition-colors text-sm">
                 <HiPhone className="text-red-500 flex-shrink-0" />
-                900 123 456
+                623 29 32 74
               </a>
-              <a href="mailto:info@aresreformas.com" className="flex items-center gap-3 text-gray-400 hover:text-red-400 transition-colors text-sm">
+              <a href="mailto:aaresreformas@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-red-400 transition-colors text-sm">
                 <HiEnvelope className="text-red-500 flex-shrink-0" />
-                info@aresreformas.com
+                aaresreformas@gmail.com
               </a>
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <HiMapPin className="text-red-500 flex-shrink-0 mt-0.5" />
-                <span>Calle Mayor, 15<br />28001 Madrid</span>
+                <span>País Vasco</span>
               </div>
             </div>
           </AnimatedSection>
@@ -64,14 +64,8 @@ export function Footer() {
           <AnimatedSection delay={0.3}>
             <h3 className="text-white font-bold text-lg mb-4">Síguenos</h3>
             <div className="flex gap-3">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
+              <a href="https://instagram.com/ares_reformas" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
                 <FaInstagram size={20} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
-                <FaFacebook size={20} />
-              </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
-                <FaTiktok size={20} />
               </a>
             </div>
           </AnimatedSection>
