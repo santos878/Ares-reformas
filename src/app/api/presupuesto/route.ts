@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { budgetSchema } from "@/lib/schemas";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
