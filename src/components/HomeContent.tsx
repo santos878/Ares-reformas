@@ -48,8 +48,8 @@ export function HomeContent() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=1920&q=80"
-            alt="Reforma interior"
+            src="https://images.unsplash.com/photo-1504307651254-57480d5f8a07?w=1920&q=80"
+            alt="Reforma de vivienda"
             fill
             className="object-cover"
             sizes="100vw"
