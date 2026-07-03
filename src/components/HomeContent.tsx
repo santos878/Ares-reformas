@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi2";
 import { AnimatedSection } from "./AnimatedSection";
 import { Button } from "./Button";
@@ -46,16 +45,13 @@ export function HomeContent() {
     <>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1504307651254-57480d5f8a07?w=1920&q=80"
-            alt="Reforma de vivienda"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1504307651254-57480d5f8a07?q=80&w=1920')",
+            backgroundAttachment: "fixed",
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.1),transparent_70%)]" />
