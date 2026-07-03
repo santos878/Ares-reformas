@@ -9,7 +9,7 @@ import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiA
 const reasons = [
   {
     icon: HiShieldCheck,
-    title: "Garantía 5 años",
+    title: "Trabajo garantizado",
     desc: "Respondemos por nuestro trabajo. Si algo falla, lo arreglamos sin coste.",
   },
   {
@@ -24,8 +24,8 @@ const reasons = [
   },
   {
     icon: HiSparkles,
-    title: "Materiales premium",
-    desc: "Solo trabajamos con primeras marcas: Porcelanosa, Silestone, Grohe, Roca...",
+    title: "Materiales",
+    desc: "Trabajamos con primeras marcas: Porcelanosa, Silestone, Grohe, Roca...",
   },
   {
     icon: HiCheckCircle,
