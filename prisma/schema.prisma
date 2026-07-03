@@ -1,0 +1,40 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+model Budget {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  phone         String
+  propertyType  String
+  rooms         Int?
+  bathrooms     Int?
+  squareMeters  Float?
+  description   String
+  budgetRange   String?
+  createdAt     DateTime @default(now())
+  read          Boolean  @default(false)
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
