@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
-import { BeforeAfter, BeforeAfterGrid } from "@/components/BeforeAfter";
 import { HiArrowRight } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 
@@ -17,33 +16,6 @@ const projects = [
   { title: "Falso techo iluminación LED", category: "Pladur y Techos", location: "Vitoria", area: "45m²", desc: "Techo registrable con downlights LED dimables, aislamiento acústico lana roca.", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800" },
   { title: "Estuco veneciano dormitorio", category: "Pintura", location: "Getxo", area: "20m²", desc: "Paredes en estuco veneciano brillo perlado, techo blanco mate, lacado puertas.", image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800" },
   { title: "Reforma integral piso 90m²", category: "Reformas Integrales", location: "Barakaldo", area: "90m²", desc: "Redistribución completa: 3 hab, 2 baños, cocina office, suelos, pintura, carpintería.", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800" },
-];
-
-const beforeAfterItems = [
-  {
-    title: "Baño años 90 → Spa moderno",
-    category: "Baños y Cocinas",
-    beforeSrc: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=800&q=80",
-    afterSrc: "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&q=80",
-  },
-  {
-    title: "Cocina cerrada → Open concept",
-    category: "Baños y Cocinas",
-    beforeSrc: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80",
-    afterSrc: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
-  },
-  {
-    title: "Suelo gris viejo → Porcelánico 120x120",
-    category: "Alicatados y Solados",
-    beforeSrc: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
-    afterSrc: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80",
-  },
-  {
-    title: "Techo viejo → LED integrado",
-    category: "Pladur y Techos",
-    beforeSrc: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    afterSrc: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-  },
 ];
 
 export default function ProyectosPage() {
@@ -145,8 +117,6 @@ export default function ProyectosPage() {
           </AnimatedSection>
         </div>
       </section>
-
-      <BeforeAfterGrid items={beforeAfterItems} />
     </>
   );
 }

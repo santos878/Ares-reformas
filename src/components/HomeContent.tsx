@@ -135,12 +135,11 @@ export function HomeContent() {
       {/* Stats */}
       <section className="relative py-24 bg-black border-y border-gray-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
             {[
               { number: "250+", label: "Proyectos completados" },
-              { number: "15+", label: "Años de experiencia" },
+              { number: "5+", label: "Años de experiencia" },
               { number: "98%", label: "Clientes satisfechos" },
-              { number: "5", label: "Años de garantía" },
             ].map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.1}>
                 <div className="text-center">
