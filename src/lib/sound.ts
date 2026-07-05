@@ -12,27 +12,44 @@ type SoundCallback = (enabled: boolean) => void;
 
 let audioContext: AudioContext | null = null;
 let enabled = true;
+let masterGain: GainNode | null = null;
 const listeners: Set<SoundCallback> = new Set();
+
+const isMobile = typeof navigator !== "undefined" &&
+  /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+const MOBILE_VOLUME_BOOST = isMobile ? 2.5 : 1;
+const MASTER_VOLUME = isMobile ? 0.15 : 0.08;
 
 function getContext(): AudioContext {
   if (!audioContext) {
     audioContext = new AudioContext();
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = MASTER_VOLUME;
+    masterGain.connect(audioContext.destination);
   }
   return audioContext;
+}
+
+function ensureContextResumed() {
+  const ctx = getContext();
+  if (ctx.state === "suspended") ctx.resume();
 }
 
 function playTone(frequency: number, duration: number, type: OscillatorType = "sine", volume = 0.03) {
   if (!enabled) return;
   try {
+    ensureContextResumed();
     const ctx = getContext();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, ctx.currentTime);
-    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    const v = volume * MOBILE_VOLUME_BOOST;
+    gain.gain.setValueAtTime(v, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(masterGain!);
     osc.start(ctx.currentTime);
     osc.stop(ctx.currentTime + duration);
   } catch {}
@@ -50,47 +67,47 @@ export const Sound = {
     switch (type) {
       case "click":
         playSequence([
-          { freq: 440, delay: 0, dur: 0.1, type: "sine", vol: 0.02 },
-          { freq: 523, delay: 20, dur: 0.1, type: "sine", vol: 0.018 },
+          { freq: 440, delay: 0, dur: 0.1, type: "sine", vol: 0.025 },
+          { freq: 523, delay: 20, dur: 0.1, type: "sine", vol: 0.022 },
         ]);
         break;
       case "hover":
         playSequence([
-          { freq: 1047, delay: 0, dur: 0.05, type: "sine", vol: 0.01 },
+          { freq: 1047, delay: 0, dur: 0.05, type: "sine", vol: 0.012 },
         ]);
         break;
       case "nav":
         playSequence([
-          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.018 },
-          { freq: 440, delay: 50, dur: 0.08, type: "sine", vol: 0.018 },
-          { freq: 349, delay: 100, dur: 0.1, type: "sine", vol: 0.018 },
+          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.022 },
+          { freq: 440, delay: 50, dur: 0.08, type: "sine", vol: 0.022 },
+          { freq: 349, delay: 100, dur: 0.1, type: "sine", vol: 0.022 },
         ]);
         break;
       case "submit":
         playSequence([
-          { freq: 330, delay: 0, dur: 0.12, type: "sine", vol: 0.02 },
-          { freq: 392, delay: 80, dur: 0.12, type: "sine", vol: 0.02 },
-          { freq: 523, delay: 180, dur: 0.2, type: "triangle", vol: 0.022 },
+          { freq: 330, delay: 0, dur: 0.12, type: "sine", vol: 0.025 },
+          { freq: 392, delay: 80, dur: 0.12, type: "sine", vol: 0.025 },
+          { freq: 523, delay: 180, dur: 0.2, type: "triangle", vol: 0.028 },
         ]);
         break;
       case "success":
         playSequence([
-          { freq: 262, delay: 0, dur: 0.12, type: "sine", vol: 0.02 },
-          { freq: 330, delay: 50, dur: 0.12, type: "sine", vol: 0.02 },
-          { freq: 392, delay: 120, dur: 0.18, type: "sine", vol: 0.022 },
+          { freq: 262, delay: 0, dur: 0.12, type: "sine", vol: 0.025 },
+          { freq: 330, delay: 50, dur: 0.12, type: "sine", vol: 0.025 },
+          { freq: 392, delay: 120, dur: 0.18, type: "sine", vol: 0.028 },
         ]);
         break;
       case "error":
         playSequence([
-          { freq: 392, delay: 0, dur: 0.15, type: "sine", vol: 0.02 },
-          { freq: 330, delay: 120, dur: 0.18, type: "sine", vol: 0.02 },
+          { freq: 392, delay: 0, dur: 0.15, type: "sine", vol: 0.025 },
+          { freq: 330, delay: 120, dur: 0.18, type: "sine", vol: 0.025 },
         ]);
         break;
       case "scroll":
-        playTone(1800, 0.01, "sine", 0.003);
+        playTone(1800, 0.01, "sine", 0.004);
         break;
       case "focus":
-        playTone(220, 0.025, "sine", 0.008);
+        playTone(220, 0.025, "sine", 0.01);
         break;
     }
   },
@@ -105,4 +122,14 @@ export const Sound = {
     listeners.add(callback);
     return () => listeners.delete(callback);
   },
+  setMasterVolume(vol: number) {
+    if (masterGain) masterGain.gain.value = vol;
+  },
 };
+
+if (typeof document !== "undefined") {
+  const resume = () => ensureContextResumed();
+  document.addEventListener("click", resume, { once: true });
+  document.addEventListener("touchstart", resume, { once: true });
+  document.addEventListener("keydown", resume, { once: true });
+}
