@@ -5,56 +5,123 @@ import { Sound } from "@/lib/sound";
 
 let audioCtx: AudioContext | null = null;
 let isPlaying = false;
-let intervalId: ReturnType<typeof setInterval> | null = null;
+let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-// Melodía arcade en loop - escala mayor ascendente/descendente
-const melody = [
-  // Frase 1: ascendente suave
-  262, 294, 330, 349, 392, 440, 494, 523,
-  // Frase 2: descendente
-  523, 494, 440, 392, 349, 330, 294, 262,
-  // Frase 3: arpegio
-  262, 330, 392, 523, 392, 330, 262, 330,
-  // Frase 4: resolución
-  349, 392, 440, 523, 659, 523, 440, 392,
+// Acordes de jazz: ii-V-I en Do mayor + variaciones
+// Cada acorde = [nota raíz, tercera, séptima]
+const jazzProgression = [
+  // ii-V-I clásico en Do
+  { chord: [294, 349, 440], bass: 147 },   // Dm7
+  { chord: [392, 494, 587], bass: 196 },   // G7
+  { chord: [262, 330, 494], bass: 131 },   // Cmaj7
+
+  // IVmaj7 - iii7 - vi7
+  { chord: [349, 440, 523], bass: 175 },   // Fmaj7
+  { chord: [330, 392, 494], bass: 165 },   // Em7
+  { chord: [220, 262, 349], bass: 110 },   // Am7
+
+  // ii-V-I con tensión
+  { chord: [294, 349, 440], bass: 147 },   // Dm7
+  { chord: [370, 466, 554], bass: 185 },   // Db7 (tritone sub)
+  { chord: [262, 330, 494], bass: 131 },   // Cmaj7
+
+  // Resolución suave
+  { chord: [196, 247, 330], bass: 98 },    // Gmaj7
+  { chord: [262, 330, 392], bass: 131 },   // C6
 ];
 
-function playNote(freq: number, ctx: AudioContext, startTime: number) {
+function playChord(notes: number[], ctx: AudioContext, startTime: number, vol = 0.012) {
+  notes.forEach((freq) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, startTime);
+    gain.gain.setValueAtTime(vol, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + 0.9);
+  });
+}
+
+function playBass(freq: number, ctx: AudioContext, startTime: number) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
-  osc.type = "square";
+  osc.type = "triangle";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.015, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+  gain.gain.setValueAtTime(0.018, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.2);
+  osc.stop(startTime + 0.7);
 }
+
+function playMelodyNote(freq: number, ctx: AudioContext, startTime: number) {
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(freq, startTime);
+  gain.gain.setValueAtTime(0.008, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(startTime);
+  osc.stop(startTime + 0.5);
+}
+
+// Melodía jazz suave sobre los acordes
+const jazzMelody = [
+  523, 494, 440, 392, 440, 523, 587, 523,
+  494, 440, 392, 349, 392, 440, 494, 523,
+  440, 392, 349, 330, 349, 392, 440, 494,
+  392, 349, 330, 294, 330, 392, 440, 392,
+  349, 330, 294, 262, 294, 330, 349, 392,
+  330, 294, 262, 247, 262, 294, 330, 349,
+];
 
 function startMelody() {
   if (isPlaying || !Sound.isEnabled()) return;
+
   try {
     audioCtx = new AudioContext();
     isPlaying = true;
-    let noteIndex = 0;
+    let chordIndex = 0;
+    let melodyIndex = 0;
 
-    const playNext = () => {
+    const playBeat = () => {
       if (!audioCtx || !isPlaying) return;
-      playNote(melody[noteIndex], audioCtx, audioCtx.currentTime);
-      noteIndex = (noteIndex + 1) % melody.length;
+
+      const now = audioCtx.currentTime;
+      const progression = jazzProgression[chordIndex];
+
+      // Acorde
+      playChord(progression.chord, audioCtx, now, 0.01);
+
+      // Bajo
+      playBass(progression.bass, audioCtx, now);
+
+      // Nota de melodía
+      playMelodyNote(jazzMelody[melodyIndex], audioCtx, now + 0.1);
+
+      chordIndex = (chordIndex + 1) % jazzProgression.length;
+      melodyIndex = (melodyIndex + 1) % jazzMelody.length;
+
+      // Tempo jazz suave ~120bpm con swing
+      const nextDelay = 800 + (Math.random() > 0.5 ? 100 : 0);
+      timeoutId = setTimeout(playBeat, nextDelay);
     };
 
-    intervalId = setInterval(playNext, 250);
-    playNext();
+    playBeat();
   } catch {}
 }
 
 function stopMelody() {
   isPlaying = false;
-  if (intervalId) {
-    clearInterval(intervalId);
-    intervalId = null;
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
   }
   if (audioCtx) {
     audioCtx.close().catch(() => {});
@@ -69,7 +136,6 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    // Esperar a que el usuario interactúe (requerido por navegadores)
     const handleInteraction = () => {
       if (!isPlaying && Sound.isEnabled()) {
         startMelody();
@@ -86,7 +152,6 @@ export function BackgroundMusic() {
     };
   }, []);
 
-  // Escuchar cambios en el estado del sonido
   useEffect(() => {
     const checkEnabled = setInterval(() => {
       if (Sound.isEnabled() && !isPlaying) {
