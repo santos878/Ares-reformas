@@ -18,6 +18,7 @@ export function NewsletterForm() {
 
   const onSubmit = async (data: NewsletterInput) => {
     setStatus("loading");
+    Sound.play("submit");
     try {
       await fetch("/api/newsletter", {
         method: "POST",
@@ -42,6 +43,7 @@ export function NewsletterForm() {
             type="email"
             placeholder="tu@email.com"
             {...register("email")}
+            onFocus={() => Sound.play("focus")}
             className={cn(
               "w-full px-4 py-3 rounded-lg bg-black/50 border text-white placeholder:text-gray-500",
               "focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent",

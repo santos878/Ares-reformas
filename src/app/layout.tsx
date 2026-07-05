@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SoundToggle } from "@/components/SoundToggle";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { PageTransitionSound } from "@/components/PageTransitionSound";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white">
         <ScrollProgress />
+        <PageTransitionSound />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { HiArrowRight } from "react-icons/hi2";
 import { AnimatedSection } from "./AnimatedSection";
 import { Button } from "./Button";
+import { Sound } from "@/lib/sound";
 
 const services = [
   {
@@ -177,6 +178,7 @@ export function HomeContent() {
               <AnimatedSection key={service.title} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -5 }}
+                  onMouseEnter={() => Sound.play("hover")}
                   className="group p-8 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300"
                 >
                   <span className="text-4xl mb-4 block">{service.icon}</span>

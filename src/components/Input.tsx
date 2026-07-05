@@ -2,6 +2,7 @@
 
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { Sound } from "@/lib/sound";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -20,6 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={id}
+          onFocus={() => Sound.play("focus")}
           className={cn(
             "w-full px-4 py-3 rounded-lg",
             "bg-black/50 border text-white",
@@ -59,6 +61,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={id}
+          onFocus={() => Sound.play("focus")}
           className={cn(
             "w-full px-4 py-3 rounded-lg",
             "bg-black/50 border text-white",
@@ -103,6 +106,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <textarea
           ref={ref}
           id={id}
+          onFocus={() => Sound.play("focus")}
           className={cn(
             "w-full px-4 py-3 rounded-lg resize-none",
             "bg-black/50 border text-white",

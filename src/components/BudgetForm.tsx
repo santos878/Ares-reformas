@@ -41,6 +41,7 @@ export function BudgetForm() {
 
   const onSubmit = async (data: BudgetInput) => {
     setStatus("loading");
+    Sound.play("submit");
     try {
       const res = await fetch("/api/presupuesto", {
         method: "POST",

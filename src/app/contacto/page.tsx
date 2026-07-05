@@ -4,6 +4,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { ContactForm } from "@/components/ContactForm";
 import { HiPhone, HiEnvelope, HiMapPin, HiClock } from "react-icons/hi2";
+import { Sound } from "@/lib/sound";
 
 export default function ContactoPage() {
   return (
@@ -36,17 +37,17 @@ export default function ContactoPage() {
             </AnimatedSection>
 
             <AnimatedSection variant="right" className="space-y-6">
-              <div className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800">
+              <div onMouseEnter={() => Sound.play("hover")} className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/30 transition-all duration-300">
                 <h3 className="text-lg font-bold text-white mb-4">Información de contacto</h3>
                 <div className="space-y-4">
-                  <a href="tel:+34623293274" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
+                  <a href="tel:+34623293274" onMouseEnter={() => Sound.play("hover")} className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
                     <HiPhone className="text-red-500 mt-1 flex-shrink-0" size={20} />
                     <div>
                       <p className="text-sm font-medium text-white">Teléfono</p>
                       <p className="text-sm">623 29 32 74</p>
                     </div>
                   </a>
-                  <a href="mailto:aaresreformas@gmail.com" className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
+                  <a href="mailto:aaresreformas@gmail.com" onMouseEnter={() => Sound.play("hover")} className="flex items-start gap-3 text-gray-400 hover:text-red-400 transition-colors">
                     <HiEnvelope className="text-red-500 mt-1 flex-shrink-0" size={20} />
                     <div>
                       <p className="text-sm font-medium text-white">Email</p>
@@ -70,7 +71,7 @@ export default function ContactoPage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800">
+              <div onMouseEnter={() => Sound.play("hover")} className="p-6 rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/30 transition-all duration-300">
                 <h3 className="text-lg font-bold text-white mb-3">Respuesta rápida</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Si prefieres, solicita directamente un presupuesto sin compromiso. 

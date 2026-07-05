@@ -7,6 +7,7 @@ import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
 import { HiArrowRight } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
+import { Sound } from "@/lib/sound";
 
 const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
@@ -51,8 +52,10 @@ export default function ProyectosPage() {
               <button
                 key={cat}
                 onClick={() => {
+                  Sound.play("click");
                   setActiveCategory(cat);
                 }}
+                onMouseEnter={() => Sound.play("hover")}
                 className={cn(
                   "px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer",
                   activeCategory === cat
@@ -75,11 +78,12 @@ export default function ProyectosPage() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {filtered.map((project, i) => (
-                <AnimatedSection key={project.title + i} delay={i * 0.05}>
-                  <motion.div
-                    whileHover={{ y: -6 }}
-                    className="group h-full rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 overflow-hidden"
-                  >
+              <AnimatedSection key={project.title + i} delay={i * 0.05}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  onMouseEnter={() => Sound.play("hover")}
+                  className="group h-full rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 overflow-hidden"
+                >
                     <div
                       className="aspect-[16/10] bg-cover bg-center bg-no-repeat relative overflow-hidden"
                       style={{ backgroundImage: `url('${project.image}')` }}

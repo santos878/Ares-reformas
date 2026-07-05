@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
 import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight, HiMapPin, HiPhone } from "react-icons/hi2";
+import { Sound } from "@/lib/sound";
 
 const reasons = [
   {
@@ -116,6 +117,7 @@ export default function NosotrosPage() {
               <AnimatedSection key={reason.title} delay={i * 0.08} variant="up">
                 <motion.article
                   whileHover={{ y: -8 }}
+                  onMouseEnter={() => Sound.play("hover")}
                   className="group relative h-full p-8 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -160,6 +162,7 @@ export default function NosotrosPage() {
               <AnimatedSection key={testimonial.name} delay={i * 0.08} variant="up">
                 <motion.article
                   whileHover={{ y: -6 }}
+                  onMouseEnter={() => Sound.play("hover")}
                   className="h-full p-8 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/30 transition-all duration-500 flex flex-col"
                 >
                   <div className="flex items-center gap-1 mb-4">

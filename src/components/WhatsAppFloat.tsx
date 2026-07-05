@@ -32,6 +32,7 @@ export function WhatsAppFloat() {
       whileHover={{ scale: 1.15, rotate: [0, -5, 5, -5, 0] }}
       whileTap={{ scale: 0.9 }}
       onMouseEnter={() => Sound.play("hover")}
+      onClick={() => Sound.play("click")}
     >
       <motion.div
         className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-xl shadow-green-500/40"

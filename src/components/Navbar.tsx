@@ -96,7 +96,7 @@ export function Navbar() {
 
           <button
             onClick={() => {
-              Sound.play("click");
+              Sound.play("nav");
               setMenuOpen(!menuOpen);
             }}
             className="md:hidden p-2 text-white hover:text-red-400 transition-colors cursor-pointer"
@@ -120,7 +120,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => Sound.play("click")}
+                  onClick={() => Sound.play("nav")}
                   className={cn(
                     "block px-4 py-3 rounded-lg text-lg font-semibold transition-colors",
                     pathname === link.href
@@ -133,7 +133,7 @@ export function Navbar() {
               ))}
               <Link
                 href="/presupuesto"
-                onClick={() => Sound.play("click")}
+                onClick={() => Sound.play("nav")}
                 className="block px-4 py-3 mt-4 bg-red-600 text-white text-center font-bold rounded-lg"
               >
                 Pedir Presupuesto

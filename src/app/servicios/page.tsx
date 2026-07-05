@@ -6,6 +6,7 @@ import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { HiCheck, HiArrowRight } from "react-icons/hi2";
+import { Sound } from "@/lib/sound";
 
 const services = [
   {
@@ -78,6 +79,7 @@ export default function ServiciosPage() {
               <AnimatedSection key={service.title} delay={i * 0.08} variant="up">
                 <motion.article
                   whileHover={{ y: -8, boxShadow: "0 30px 60px -15px rgba(220, 38, 38, 0.2)" }}
+                  onMouseEnter={() => Sound.play("hover")}
                   className="group relative h-full p-8 lg:p-10 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500 overflow-hidden"
                 >
                   <motion.div

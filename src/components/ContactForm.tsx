@@ -24,6 +24,7 @@ export function ContactForm() {
 
   const onSubmit = async (data: ContactInput) => {
     setStatus("loading");
+    Sound.play("submit");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
