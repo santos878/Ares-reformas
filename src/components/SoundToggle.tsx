@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { Sound } from "@/lib/sound";
@@ -8,11 +9,18 @@ import { useSound } from "@/lib/use-sound";
 export function SoundToggle() {
   const { enabled, toggle } = useSound();
 
+  useEffect(() => {
+    Sound.setEnabled(enabled);
+  }, [enabled]);
+
   const handleToggle = () => {
     toggle();
-    Sound.setEnabled(!enabled);
-    if (enabled) {
-      Sound.play("click");
+    const next = !enabled;
+    if (next) {
+      // Delay click slightly so Web Audio API starts after unmuting
+      setTimeout(() => {
+        Sound.play("click");
+      }, 50);
     }
   };
 

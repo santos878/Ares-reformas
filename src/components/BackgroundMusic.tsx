@@ -7,29 +7,21 @@ let audioCtx: AudioContext | null = null;
 let isPlaying = false;
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-// Lo-Fi Jazz - estilo "The Player" / Lofi Girl
-// Acordes de jazz suaves con ritmo relajado
 const lofiProgression = [
-  // Am7 - Dm7 - G7 - Cmaj7 (ii-V-I clásico lofi)
   { chord: [220, 262, 330], bass: 110 },
   { chord: [294, 349, 440], bass: 147 },
   { chord: [196, 247, 330], bass: 98 },
   { chord: [262, 330, 392], bass: 131 },
-
-  // Fmaj7 - Em7 - Am7 - Dm7
   { chord: [175, 220, 262], bass: 87 },
   { chord: [165, 196, 247], bass: 82 },
   { chord: [220, 262, 330], bass: 110 },
   { chord: [294, 349, 440], bass: 147 },
-
-  // G7 - Cmaj7 - Fmaj7 - G7
   { chord: [196, 247, 330], bass: 98 },
   { chord: [262, 330, 392], bass: 131 },
   { chord: [175, 220, 262], bass: 87 },
   { chord: [196, 247, 330], bass: 98 },
 ];
 
-// Melodía lo-fi jazz suave (piano eléctrico)
 const lofiMelody = [
   440, 494, 523, 494, 440, 392, 440, 494,
   523, 587, 523, 494, 440, 392, 349, 392,
@@ -95,19 +87,13 @@ function startMelody() {
       const now = audioCtx.currentTime;
       const progression = lofiProgression[chordIndex];
 
-      // Acorde lo-fi (suave, sostenido)
       playLofiChord(progression.chord, audioCtx, now);
-
-      // Bajo lo-fi
       playLofiBass(progression.bass, audioCtx, now);
-
-      // Nota de melodía (piano eléctrico)
       playLofiMelody(lofiMelody[melodyIndex], audioCtx, now + 0.15);
 
       chordIndex = (chordIndex + 1) % lofiProgression.length;
       melodyIndex = (melodyIndex + 1) % lofiMelody.length;
 
-      // Tempo lo-fi relajado ~90bpm
       const nextDelay = 650 + (Math.random() > 0.5 ? 50 : 0);
       timeoutId = setTimeout(playBeat, nextDelay);
     };
@@ -135,6 +121,16 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
+    // Escuchar cambios en el estado del sonido (inmediato, sin polling)
+    const unsubscribe = Sound.onChange((isEnabled) => {
+      if (isEnabled && !isPlaying) {
+        startMelody();
+      } else if (!isEnabled && isPlaying) {
+        stopMelody();
+      }
+    });
+
+    // Iniciar con el primer click
     const handleInteraction = () => {
       if (!isPlaying && Sound.isEnabled()) {
         startMelody();
@@ -145,22 +141,11 @@ export function BackgroundMusic() {
     document.addEventListener("touchstart", handleInteraction, { once: true });
 
     return () => {
+      unsubscribe();
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
       stopMelody();
     };
-  }, []);
-
-  useEffect(() => {
-    const checkEnabled = setInterval(() => {
-      if (Sound.isEnabled() && !isPlaying) {
-        startMelody();
-      } else if (!Sound.isEnabled() && isPlaying) {
-        stopMelody();
-      }
-    }, 500);
-
-    return () => clearInterval(checkEnabled);
   }, []);
 
   return null;
