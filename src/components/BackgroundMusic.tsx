@@ -7,79 +7,78 @@ let audioCtx: AudioContext | null = null;
 let isPlaying = false;
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-// Acordes de jazz: ii-V-I en Do mayor + variaciones
-// Cada acorde = [nota raíz, tercera, séptima]
-const jazzProgression = [
-  // ii-V-I clásico en Do
-  { chord: [294, 349, 440], bass: 147 },   // Dm7
-  { chord: [392, 494, 587], bass: 196 },   // G7
-  { chord: [262, 330, 494], bass: 131 },   // Cmaj7
+// Lo-Fi Jazz - estilo "The Player" / Lofi Girl
+// Acordes de jazz suaves con ritmo relajado
+const lofiProgression = [
+  // Am7 - Dm7 - G7 - Cmaj7 (ii-V-I clásico lofi)
+  { chord: [220, 262, 330], bass: 110 },
+  { chord: [294, 349, 440], bass: 147 },
+  { chord: [196, 247, 330], bass: 98 },
+  { chord: [262, 330, 392], bass: 131 },
 
-  // IVmaj7 - iii7 - vi7
-  { chord: [349, 440, 523], bass: 175 },   // Fmaj7
-  { chord: [330, 392, 494], bass: 165 },   // Em7
-  { chord: [220, 262, 349], bass: 110 },   // Am7
+  // Fmaj7 - Em7 - Am7 - Dm7
+  { chord: [175, 220, 262], bass: 87 },
+  { chord: [165, 196, 247], bass: 82 },
+  { chord: [220, 262, 330], bass: 110 },
+  { chord: [294, 349, 440], bass: 147 },
 
-  // ii-V-I con tensión
-  { chord: [294, 349, 440], bass: 147 },   // Dm7
-  { chord: [370, 466, 554], bass: 185 },   // Db7 (tritone sub)
-  { chord: [262, 330, 494], bass: 131 },   // Cmaj7
-
-  // Resolución suave
-  { chord: [196, 247, 330], bass: 98 },    // Gmaj7
-  { chord: [262, 330, 392], bass: 131 },   // C6
+  // G7 - Cmaj7 - Fmaj7 - G7
+  { chord: [196, 247, 330], bass: 98 },
+  { chord: [262, 330, 392], bass: 131 },
+  { chord: [175, 220, 262], bass: 87 },
+  { chord: [196, 247, 330], bass: 98 },
 ];
 
-function playChord(notes: number[], ctx: AudioContext, startTime: number, vol = 0.012) {
+// Melodía lo-fi jazz suave (piano eléctrico)
+const lofiMelody = [
+  440, 494, 523, 494, 440, 392, 440, 494,
+  523, 587, 523, 494, 440, 392, 349, 392,
+  440, 494, 523, 587, 659, 587, 523, 494,
+  440, 392, 349, 330, 349, 392, 440, 392,
+  349, 330, 294, 262, 294, 330, 349, 392,
+  330, 294, 262, 247, 262, 294, 330, 294,
+];
+
+function playLofiChord(notes: number[], ctx: AudioContext, startTime: number) {
   notes.forEach((freq) => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = "sine";
     osc.frequency.setValueAtTime(freq, startTime);
-    gain.gain.setValueAtTime(vol, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+    gain.gain.setValueAtTime(0.012, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.2);
     osc.connect(gain);
     gain.connect(ctx.destination);
     osc.start(startTime);
-    osc.stop(startTime + 0.9);
+    osc.stop(startTime + 1.3);
   });
 }
 
-function playBass(freq: number, ctx: AudioContext, startTime: number) {
+function playLofiBass(freq: number, ctx: AudioContext, startTime: number) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = "triangle";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.018, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
+  gain.gain.setValueAtTime(0.02, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.7);
+  osc.stop(startTime + 0.9);
 }
 
-function playMelodyNote(freq: number, ctx: AudioContext, startTime: number) {
+function playLofiMelody(freq: number, ctx: AudioContext, startTime: number) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = "sine";
   osc.frequency.setValueAtTime(freq, startTime);
   gain.gain.setValueAtTime(0.008, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.5);
+  osc.stop(startTime + 0.6);
 }
-
-// Melodía jazz suave sobre los acordes
-const jazzMelody = [
-  523, 494, 440, 392, 440, 523, 587, 523,
-  494, 440, 392, 349, 392, 440, 494, 523,
-  440, 392, 349, 330, 349, 392, 440, 494,
-  392, 349, 330, 294, 330, 392, 440, 392,
-  349, 330, 294, 262, 294, 330, 349, 392,
-  330, 294, 262, 247, 262, 294, 330, 349,
-];
 
 function startMelody() {
   if (isPlaying || !Sound.isEnabled()) return;
@@ -94,22 +93,22 @@ function startMelody() {
       if (!audioCtx || !isPlaying) return;
 
       const now = audioCtx.currentTime;
-      const progression = jazzProgression[chordIndex];
+      const progression = lofiProgression[chordIndex];
 
-      // Acorde
-      playChord(progression.chord, audioCtx, now, 0.01);
+      // Acorde lo-fi (suave, sostenido)
+      playLofiChord(progression.chord, audioCtx, now);
 
-      // Bajo
-      playBass(progression.bass, audioCtx, now);
+      // Bajo lo-fi
+      playLofiBass(progression.bass, audioCtx, now);
 
-      // Nota de melodía
-      playMelodyNote(jazzMelody[melodyIndex], audioCtx, now + 0.1);
+      // Nota de melodía (piano eléctrico)
+      playLofiMelody(lofiMelody[melodyIndex], audioCtx, now + 0.15);
 
-      chordIndex = (chordIndex + 1) % jazzProgression.length;
-      melodyIndex = (melodyIndex + 1) % jazzMelody.length;
+      chordIndex = (chordIndex + 1) % lofiProgression.length;
+      melodyIndex = (melodyIndex + 1) % lofiMelody.length;
 
-      // Tempo jazz suave ~120bpm con swing
-      const nextDelay = 800 + (Math.random() > 0.5 ? 100 : 0);
+      // Tempo lo-fi relajado ~90bpm
+      const nextDelay = 650 + (Math.random() > 0.5 ? 50 : 0);
       timeoutId = setTimeout(playBeat, nextDelay);
     };
 

@@ -18,7 +18,7 @@ function getContext(): AudioContext {
   return audioContext;
 }
 
-function playTone(frequency: number, duration: number, type: OscillatorType = "sine", volume = 0.04) {
+function playTone(frequency: number, duration: number, type: OscillatorType = "sine", volume = 0.03) {
   if (!enabled) return;
   try {
     const ctx = getContext();
@@ -37,7 +37,7 @@ function playTone(frequency: number, duration: number, type: OscillatorType = "s
 
 function playSequence(notes: { freq: number; delay: number; dur: number; type?: OscillatorType; vol?: number }[]) {
   if (!enabled) return;
-  notes.forEach(({ freq, delay, dur, type = "sine", vol = 0.035 }) => {
+  notes.forEach(({ freq, delay, dur, type = "sine", vol = 0.025 }) => {
     setTimeout(() => playTone(freq, dur, type, vol), delay);
   });
 }
@@ -45,66 +45,64 @@ function playSequence(notes: { freq: number; delay: number; dur: number; type?: 
 export const Sound = {
   play(type: SoundType) {
     switch (type) {
-      // Click: acorde suave Mayor (Do-Mi-Sol)
+      // Click: acorde lo-fi suave (Am)
       case "click":
         playSequence([
-          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.03 },
-          { freq: 659, delay: 15, dur: 0.08, type: "sine", vol: 0.025 },
-          { freq: 784, delay: 30, dur: 0.1, type: "sine", vol: 0.02 },
+          { freq: 440, delay: 0, dur: 0.1, type: "sine", vol: 0.02 },
+          { freq: 523, delay: 20, dur: 0.1, type: "sine", vol: 0.018 },
         ]);
         break;
 
-      // Hover: nota aguda delicada
+      // Hover: nota aguda delicada (piano eléctrico)
       case "hover":
         playSequence([
-          { freq: 1319, delay: 0, dur: 0.04, type: "sine", vol: 0.015 },
+          { freq: 1047, delay: 0, dur: 0.05, type: "sine", vol: 0.01 },
         ]);
         break;
 
-      // Nav: arpegio descendente suave (como piano clásico)
+      // Nav: arpegio descendente suave
       case "nav":
         playSequence([
-          { freq: 784, delay: 0, dur: 0.06, type: "sine", vol: 0.025 },
-          { freq: 659, delay: 40, dur: 0.06, type: "sine", vol: 0.025 },
-          { freq: 523, delay: 80, dur: 0.08, type: "sine", vol: 0.025 },
+          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.018 },
+          { freq: 440, delay: 50, dur: 0.08, type: "sine", vol: 0.018 },
+          { freq: 349, delay: 100, dur: 0.1, type: "sine", vol: 0.018 },
         ]);
         break;
 
-      // Submit: fanfarria clásica (acorde ascendente)
+      // Submit: fanfarria lo-fi (resolución)
       case "submit":
         playSequence([
-          { freq: 262, delay: 0, dur: 0.1, type: "triangle", vol: 0.03 },
-          { freq: 330, delay: 80, dur: 0.1, type: "triangle", vol: 0.03 },
-          { freq: 392, delay: 160, dur: 0.1, type: "triangle", vol: 0.03 },
-          { freq: 523, delay: 240, dur: 0.2, type: "sine", vol: 0.035 },
+          { freq: 330, delay: 0, dur: 0.12, type: "sine", vol: 0.02 },
+          { freq: 392, delay: 80, dur: 0.12, type: "sine", vol: 0.02 },
+          { freq: 523, delay: 180, dur: 0.2, type: "triangle", vol: 0.022 },
         ]);
         break;
 
-      // Success: resolución clásica (V-I)
+      // Success: acorde Mayor suave
       case "success":
         playSequence([
-          { freq: 392, delay: 0, dur: 0.1, type: "sine", vol: 0.03 },
-          { freq: 494, delay: 60, dur: 0.1, type: "sine", vol: 0.03 },
-          { freq: 523, delay: 150, dur: 0.2, type: "triangle", vol: 0.035 },
+          { freq: 262, delay: 0, dur: 0.12, type: "sine", vol: 0.02 },
+          { freq: 330, delay: 50, dur: 0.12, type: "sine", vol: 0.02 },
+          { freq: 392, delay: 120, dur: 0.18, type: "sine", vol: 0.022 },
         ]);
         break;
 
-      // Error: intervalo descendente menor
+      // Error: nota descendente suave
       case "error":
         playSequence([
-          { freq: 392, delay: 0, dur: 0.12, type: "sine", vol: 0.03 },
-          { freq: 349, delay: 100, dur: 0.15, type: "sine", vol: 0.03 },
+          { freq: 392, delay: 0, dur: 0.15, type: "sine", vol: 0.02 },
+          { freq: 330, delay: 120, dur: 0.18, type: "sine", vol: 0.02 },
         ]);
         break;
 
-      // Scroll: tick casi inaudible
+      // Scroll: casi inaudible
       case "scroll":
-        playTone(2000, 0.01, "sine", 0.005);
+        playTone(1800, 0.01, "sine", 0.003);
         break;
 
-      // Focus: nota grave sutil
+      // Focus: nota grave muy suave
       case "focus":
-        playTone(220, 0.02, "sine", 0.01);
+        playTone(220, 0.025, "sine", 0.008);
         break;
     }
   },
