@@ -64,7 +64,7 @@ export default function ServiciosPage() {
           />
           <AnimatedSection delay={0.3} className="mt-6 max-w-3xl mx-auto">
             <p className="text-gray-400 text-lg leading-relaxed">
-              Más de 15 años transformando hogares en País Vasco. 
+              Más de 5 años transformando hogares en País Vasco. 
               Cada servicio se ejecuta con materiales de primera y acabados impecables.
             </p>
           </AnimatedSection>

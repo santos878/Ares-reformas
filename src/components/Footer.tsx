@@ -18,7 +18,7 @@ export function Footer() {
                 <span className="text-2xl font-light text-red-500">Reformas</span>
               </Link>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Transformamos espacios desde 2010. Especialistas en reformas integrales con diseño y calidad.
+                Transformamos espacios con dedicación y profesionalidad. Especialistas en reformas integrales con diseño y calidad.
               </p>
             </div>
           </AnimatedSection>

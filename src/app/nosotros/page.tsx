@@ -11,7 +11,7 @@ const reasons = [
   {
     icon: HiStar,
     title: "Equipo experimentado",
-    desc: "Profesionales con más de 15 años de oficio. Sabemos lo que hacemos.",
+    desc: "Profesionales con más de 5 años de oficio. Sabemos lo que hacemos.",
   },
   {
     icon: HiPhone,
@@ -92,7 +92,7 @@ export default function NosotrosPage() {
           />
           <AnimatedSection delay={0.3} className="mt-6 max-w-3xl mx-auto">
             <p className="text-gray-400 text-lg leading-relaxed">
-              Más de 15 años transformando hogares en País Vasco. 
+              Más de 5 años transformando hogares en País Vasco. 
               Profesionales que cumplen lo que prometen.
             </p>
           </AnimatedSection>
