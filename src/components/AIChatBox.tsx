@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "./Button";
+import { TextArea } from "./Input";
 import { cn } from "@/lib/utils";
 import { Loader2, Send, User, Sparkles } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -308,7 +307,7 @@ export function AIChatBox({
         onSubmit={handleSubmit}
         className="flex gap-2 p-4 border-t bg-background/50 items-end"
       >
-        <Textarea
+        <TextArea
           ref={textareaRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -316,6 +315,7 @@ export function AIChatBox({
           placeholder={placeholder}
           className="flex-1 max-h-32 resize-none min-h-9"
           rows={1}
+          id="chat-input"
         />
         <Button
           type="submit"
