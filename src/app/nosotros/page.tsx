@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedText } from "@/components/AnimatedText";
 import { Button } from "@/components/Button";
-import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight, HiMapPin, HiPhone } from "react-icons/hi2";
+import { HiStar, HiCheckCircle, HiShieldCheck, HiClock, HiHeart, HiSparkles, HiArrowRight, HiMapPin, HiPhone, HiGlobeAlt } from "react-icons/hi2";
 import { Sound } from "@/lib/sound";
 
 const reasons = [
@@ -138,6 +138,57 @@ export default function NosotrosPage() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Nationalities */}
+      <section className="pb-24 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(220,38,38,0.04),transparent_70%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
+            <span className="text-red-500 font-semibold tracking-[0.3em] uppercase text-sm">
+              Nuestro equipo
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mt-4">
+              Variedad que <span className="text-red-500">nos hace fuertes</span>
+            </h2>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              Un equipo multicultural con profesionales de diferentes orígenes, unidos por la misma pasión: hacer bien las reformas.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              { flag: "🇪🇸", name: "Españoles", desc: "Núcleo del equipo" },
+              { flag: "🇷🇴", name: "Rumanos", desc: "Especialistas en obra" },
+              { flag: "🇦🇷", name: "Argentinos", desc: "Diseño y acabados" },
+              { flag: "🇨🇴", name: "Colombianos", desc: "Fontanería y electricidad" },
+              { flag: "🇳🇮", name: "Nicaragüenses", desc: "Carpintería y pintura" },
+            ].map((nationality, i) => (
+              <AnimatedSection key={nationality.name} delay={i * 0.08} variant="up">
+                <motion.article
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  onMouseEnter={() => Sound.play("hover")}
+                  className="group text-center p-6 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500"
+                >
+                  <div className="text-5xl mb-3">{nationality.flag}</div>
+                  <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors">
+                    {nationality.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm mt-1">{nationality.desc}</p>
+                </motion.article>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection delay={0.4} className="mt-10 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-red-600/10 border border-red-600/20">
+              <HiGlobeAlt className="text-red-400 size-5" />
+              <p className="text-gray-300 text-sm">
+                <span className="font-bold text-white">+5 nacionalidades</span> trabajando juntas con un solo objetivo: tu reforma perfecta.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
