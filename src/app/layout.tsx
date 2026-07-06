@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SoundToggle } from "@/components/SoundToggle";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { ChatBot } from "@/components/ChatBot";
 import { PageTransitionSound } from "@/components/PageTransitionSound";
 import { BackgroundMusic } from "@/components/BackgroundMusic";
 
@@ -89,6 +90,7 @@ export default function RootLayout({
         <Footer />
         <SoundToggle />
         <WhatsAppFloat />
+        <ChatBot />
       </body>
     </html>
   );
