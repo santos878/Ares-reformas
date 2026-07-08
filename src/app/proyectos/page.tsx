@@ -11,7 +11,9 @@ import { Sound } from "@/lib/sound";
 
 const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
-const projects: { title: string; category: string; location: string; area: string; desc: string; image: string; imageAfter?: string }[] = [];
+const projects: { title: string; category: string; location: string; area: string; desc: string; image: string; imageAfter?: string }[] = [
+  { title: "Reforma completa de baño", category: "Baños y Cocinas", location: "Bilbao", area: "5m²", desc: "Reforma integral: plato de ducha con mampara, mueble suspendido, porcelánico gran formato, grifería negra mate.", image: "https://i.imgur.com/u6kGnbL.png", imageAfter: "https://i.imgur.com/sE2oGT3.png" },
+];
 
 export default function ProyectosPage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
