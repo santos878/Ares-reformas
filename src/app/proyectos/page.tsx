@@ -15,6 +15,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Reforma completa de baño", category: "Baños y Cocinas", location: "Bilbao", area: "5m²", desc: "Reforma integral: plato de ducha con mampara, mueble suspendido, porcelánico gran formato, grifería negra mate.", image: "https://i.imgur.com/u6kGnbL.png", imageAfter: "https://i.imgur.com/sE2oGT3.png" },
   { title: "Reforma de salón con suelo laminado", category: "Alicatados y Solados", location: "Getxo", area: "18m²", desc: "Cambio de suelo terrazo por laminado de roble, pintura completa de paredes y techo.", image: "https://i.imgur.com/WeeeA0a.png", imageAfter: "https://i.imgur.com/WQuYeJO.png" },
   { title: "Reforma integral de piso", category: "Reformas Integrales", location: "Bilbao", area: "45m²", desc: "Reforma completa: suelo laminado, pintura de paredes y techo, molduras, iluminación empotrada, recorte de puertas.", image: "https://i.imgur.com/sCtnG1r.png", imageAfter: "https://i.imgur.com/52ItiuJ.png" },
+  { title: "Reforma de cocina", category: "Baños y Cocinas", location: "Barakaldo", area: "9m²", desc: "Reforma completa: nuevos armarios, encimera, porcelánico gran formato, grifería moderna y fregadero bajo encimera.", image: "https://i.imgur.com/WFZgxB7.png", imageAfter: "https://i.imgur.com/RgZbPbM.png" },
 ];
 
 export default function ProyectosPage() {
