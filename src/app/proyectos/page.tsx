@@ -13,6 +13,7 @@ const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur
 
 const projects: { title: string; category: string; location: string; area: string; desc: string; image: string; imageAfter?: string }[] = [
   { title: "Reforma completa de baño", category: "Baños y Cocinas", location: "Bilbao", area: "5m²", desc: "Reforma integral: plato de ducha con mampara, mueble suspendido, porcelánico gran formato, grifería negra mate.", image: "https://i.imgur.com/u6kGnbL.png", imageAfter: "https://i.imgur.com/sE2oGT3.png" },
+  { title: "Reforma de salón con suelo laminado", category: "Alicatados y Solados", location: "Getxo", area: "18m²", desc: "Cambio de suelo terrazo por laminado de roble, pintura completa de paredes y techo.", image: "https://i.imgur.com/WeeeA0a.png", imageAfter: "https://i.imgur.com/WQuYeJO.png" },
 ];
 
 export default function ProyectosPage() {
