@@ -19,7 +19,7 @@ const isMobile = typeof navigator !== "undefined" &&
   /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const MOBILE_VOLUME_BOOST = isMobile ? 2.5 : 1;
-const MASTER_VOLUME = isMobile ? 0.15 : 0.08;
+const MASTER_VOLUME = isMobile ? 0.35 : 0.2;
 
 function getContext(): AudioContext {
   if (!audioContext) {
@@ -67,47 +67,47 @@ export const Sound = {
     switch (type) {
       case "click":
         playSequence([
-          { freq: 440, delay: 0, dur: 0.1, type: "sine", vol: 0.025 },
-          { freq: 523, delay: 20, dur: 0.1, type: "sine", vol: 0.022 },
+          { freq: 440, delay: 0, dur: 0.1, type: "sine", vol: 0.06 },
+          { freq: 523, delay: 20, dur: 0.1, type: "sine", vol: 0.05 },
         ]);
         break;
       case "hover":
         playSequence([
-          { freq: 1047, delay: 0, dur: 0.05, type: "sine", vol: 0.012 },
+          { freq: 1047, delay: 0, dur: 0.05, type: "sine", vol: 0.03 },
         ]);
         break;
       case "nav":
         playSequence([
-          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.022 },
-          { freq: 440, delay: 50, dur: 0.08, type: "sine", vol: 0.022 },
-          { freq: 349, delay: 100, dur: 0.1, type: "sine", vol: 0.022 },
+          { freq: 523, delay: 0, dur: 0.08, type: "sine", vol: 0.05 },
+          { freq: 440, delay: 50, dur: 0.08, type: "sine", vol: 0.05 },
+          { freq: 349, delay: 100, dur: 0.1, type: "sine", vol: 0.05 },
         ]);
         break;
       case "submit":
         playSequence([
-          { freq: 330, delay: 0, dur: 0.12, type: "sine", vol: 0.025 },
-          { freq: 392, delay: 80, dur: 0.12, type: "sine", vol: 0.025 },
-          { freq: 523, delay: 180, dur: 0.2, type: "triangle", vol: 0.028 },
+          { freq: 330, delay: 0, dur: 0.12, type: "sine", vol: 0.06 },
+          { freq: 392, delay: 80, dur: 0.12, type: "sine", vol: 0.06 },
+          { freq: 523, delay: 180, dur: 0.2, type: "triangle", vol: 0.07 },
         ]);
         break;
       case "success":
         playSequence([
-          { freq: 262, delay: 0, dur: 0.12, type: "sine", vol: 0.025 },
-          { freq: 330, delay: 50, dur: 0.12, type: "sine", vol: 0.025 },
-          { freq: 392, delay: 120, dur: 0.18, type: "sine", vol: 0.028 },
+          { freq: 262, delay: 0, dur: 0.12, type: "sine", vol: 0.06 },
+          { freq: 330, delay: 50, dur: 0.12, type: "sine", vol: 0.06 },
+          { freq: 392, delay: 120, dur: 0.18, type: "sine", vol: 0.07 },
         ]);
         break;
       case "error":
         playSequence([
-          { freq: 392, delay: 0, dur: 0.15, type: "sine", vol: 0.025 },
-          { freq: 330, delay: 120, dur: 0.18, type: "sine", vol: 0.025 },
+          { freq: 392, delay: 0, dur: 0.15, type: "sine", vol: 0.06 },
+          { freq: 330, delay: 120, dur: 0.18, type: "sine", vol: 0.06 },
         ]);
         break;
       case "scroll":
-        playTone(1800, 0.01, "sine", 0.004);
+        playTone(1800, 0.01, "sine", 0.01);
         break;
       case "focus":
-        playTone(220, 0.025, "sine", 0.01);
+        playTone(220, 0.025, "sine", 0.025);
         break;
     }
   },

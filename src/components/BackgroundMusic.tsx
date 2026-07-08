@@ -37,7 +37,7 @@ function playLofiChord(notes: number[], ctx: AudioContext, startTime: number) {
     const gain = ctx.createGain();
     osc.type = "sine";
     osc.frequency.setValueAtTime(freq, startTime);
-    gain.gain.setValueAtTime(0.012, startTime);
+    gain.gain.setValueAtTime(0.06, startTime);
     gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.2);
     osc.connect(gain);
     gain.connect(ctx.destination);
@@ -51,7 +51,7 @@ function playLofiBass(freq: number, ctx: AudioContext, startTime: number) {
   const gain = ctx.createGain();
   osc.type = "triangle";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.02, startTime);
+  gain.gain.setValueAtTime(0.08, startTime);
   gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
   osc.connect(gain);
   gain.connect(ctx.destination);
@@ -64,7 +64,7 @@ function playLofiMelody(freq: number, ctx: AudioContext, startTime: number) {
   const gain = ctx.createGain();
   osc.type = "sine";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.008, startTime);
+  gain.gain.setValueAtTime(0.04, startTime);
   gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
   osc.connect(gain);
   gain.connect(ctx.destination);
