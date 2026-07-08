@@ -11,13 +11,7 @@ import { Sound } from "@/lib/sound";
 
 const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
-const projects = [
-  { title: "Baño moderno + Cocina abierta", category: "Baños y Cocinas", location: "Bilbao", area: "35m²", desc: "Reforma completa: plato de ducha, mueble suspendido, cocina con isla y encimera silestone.", image: "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=800" },
-  { title: "Porcelánico gran formato salón", category: "Alicatados y Solados", location: "Donostia", area: "60m²", desc: "Suelo porcelánico 120x120 rectificado, junta 1mm, zócalo a ras. Calefacción radiante.", image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800" },
-  { title: "Falso techo iluminación LED", category: "Pladur y Techos", location: "Vitoria", area: "45m²", desc: "Techo registrable con downlights LED dimables, aislamiento acústico lana roca.", image: "https://images.unsplash.com/photo-1614292253262-012345717f83?q=80&w=800" },
-  { title: "Estuco veneciano dormitorio", category: "Pintura", location: "Getxo", area: "20m²", desc: "Paredes en estuco veneciano brillo perlado, techo blanco mate, lacado puertas.", image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800" },
-  { title: "Reforma integral piso 90m²", category: "Reformas Integrales", location: "Barakaldo", area: "90m²", desc: "Redistribución completa: 3 hab, 2 baños, cocina office, suelos, pintura, carpintería.", image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=800" },
-];
+const projects: { title: string; category: string; location: string; area: string; desc: string; image: string; imageAfter?: string }[] = [];
 
 export default function ProyectosPage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -84,15 +78,37 @@ export default function ProyectosPage() {
                   onMouseEnter={() => Sound.play("hover")}
                   className="group h-full rounded-2xl bg-gradient-to-b from-gray-900 to-black border border-gray-800 hover:border-red-600/50 transition-all duration-300 overflow-hidden"
                 >
-                    <div
-                      className="aspect-[16/10] bg-cover bg-center bg-no-repeat relative overflow-hidden"
-                      style={{ backgroundImage: `url('${project.image}')` }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      <span className="absolute bottom-4 left-4 text-white font-medium">
-                        {project.area}
-                      </span>
-                    </div>
+                    {project.imageAfter ? (
+                      <div className="aspect-[16/10] grid grid-cols-2 relative overflow-hidden">
+                        <div
+                          className="bg-cover bg-center bg-no-repeat relative"
+                          style={{ backgroundImage: `url('${project.image}')` }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                          <span className="absolute top-3 left-3 text-white text-xs font-bold bg-black/60 px-2 py-1 rounded">ANTES</span>
+                        </div>
+                        <div
+                          className="bg-cover bg-center bg-no-repeat relative"
+                          style={{ backgroundImage: `url('${project.imageAfter}')` }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                          <span className="absolute top-3 left-3 text-red-400 text-xs font-bold bg-black/60 px-2 py-1 rounded">DESPUÉS</span>
+                          <span className="absolute bottom-3 left-3 text-white font-medium text-sm">
+                            {project.area}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="aspect-[16/10] bg-cover bg-center bg-no-repeat relative overflow-hidden"
+                        style={{ backgroundImage: `url('${project.image}')` }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                        <span className="absolute bottom-4 left-4 text-white font-medium">
+                          {project.area}
+                        </span>
+                      </div>
+                    )}
                     <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="text-xs font-semibold text-red-500 bg-red-500/10 px-3 py-1 rounded-full">
@@ -108,6 +124,11 @@ export default function ProyectosPage() {
                   </motion.div>
                 </AnimatedSection>
               ))}
+              {filtered.length === 0 && (
+                <div className="col-span-full text-center py-20">
+                  <p className="text-gray-500 text-lg">Próximamente mostrarán nuestros proyectos con fotos antes y después.</p>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
 
