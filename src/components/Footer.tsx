@@ -69,6 +69,9 @@ export function Footer() {
               <a href="https://www.instagram.com/ares_reformas_" target="_blank" rel="noopener noreferrer" onMouseEnter={() => Sound.play("hover")} onClick={() => Sound.play("click")} className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
                 <FaInstagram size={20} />
               </a>
+              <a href="https://www.tiktok.com/@ares_reformas_" target="_blank" rel="noopener noreferrer" onMouseEnter={() => Sound.play("hover")} onClick={() => Sound.play("click")} className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
+                <FaTiktok size={20} />
+              </a>
             </div>
           </AnimatedSection>
         </div>
