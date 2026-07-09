@@ -28,7 +28,6 @@ function pausePhonk() {
 
 export function BackgroundMusic() {
   const started = useRef(false);
-  const lastEnabled = useRef(Sound.isEnabled());
 
   useEffect(() => {
     if (started.current) return;
@@ -38,24 +37,13 @@ export function BackgroundMusic() {
       playPhonk();
     }
 
-    const unsubscribe = Sound.onChange((enabled) => {
-      if (enabled === lastEnabled.current) return;
-      lastEnabled.current = enabled;
-      if (enabled) playPhonk();
+    const unsubscribe = Sound.onChange((isEnabled) => {
+      if (isEnabled) playPhonk();
       else pausePhonk();
     });
 
-    const onInteract = (e: Event) => {
-      if ((e.target as HTMLElement).closest("[aria-label*='sonido']")) return;
-      playPhonk();
-    };
-    document.addEventListener("click", onInteract);
-    document.addEventListener("touchstart", onInteract);
-
     return () => {
       unsubscribe();
-      document.removeEventListener("click", onInteract);
-      document.removeEventListener("touchstart", onInteract);
       pausePhonk();
     };
   }, []);
