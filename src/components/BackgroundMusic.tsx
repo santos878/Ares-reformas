@@ -10,18 +10,24 @@ function startPhonk() {
   if (isPlaying) return;
 
   try {
-    audioElement = new Audio("/audio/phonk-bg.mp3");
-    audioElement.loop = true;
-    audioElement.volume = 0.5;
-    audioElement.play().then(() => {
+    const el = new Audio("/audio/phonk-bg.mp3");
+    el.loop = true;
+    el.volume = 0.5;
+    const promise = el.play();
+    if (promise !== undefined) {
+      promise.then(() => {
+        isPlaying = true;
+        audioElement = el;
+      }).catch(() => {
+        if (audioElement === el) {
+          audioElement = null;
+        }
+      });
+    } else {
       isPlaying = true;
-    }).catch(() => {
-      isPlaying = false;
-      audioElement = null;
-    });
-  } catch {
-    isPlaying = false;
-  }
+      audioElement = el;
+    }
+  } catch {}
 }
 
 function stopPhonk() {
@@ -35,12 +41,11 @@ function stopPhonk() {
 
 export function BackgroundMusic() {
   const started = useRef(false);
+  const userInteracted = useRef(false);
 
   useEffect(() => {
     if (started.current) return;
     started.current = true;
-
-    startPhonk();
 
     const unsubscribe = Sound.onChange((isEnabled) => {
       if (isEnabled && !isPlaying) {
@@ -51,7 +56,10 @@ export function BackgroundMusic() {
     });
 
     const handleInteraction = () => {
-      if (!isPlaying) startPhonk();
+      if (!userInteracted.current) {
+        userInteracted.current = true;
+        startPhonk();
+      }
     };
 
     document.addEventListener("click", handleInteraction);
