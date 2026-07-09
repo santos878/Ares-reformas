@@ -9,25 +9,34 @@ let isPlaying = false;
 function startPhonk() {
   if (isPlaying) return;
 
+  if (audioElement) {
+    audioElement.pause();
+    audioElement = null;
+  }
+
   try {
     const el = new Audio("/audio/phonk-bg.mp3");
     el.loop = true;
     el.volume = 0.5;
+    audioElement = el;
+
     const promise = el.play();
     if (promise !== undefined) {
       promise.then(() => {
         isPlaying = true;
-        audioElement = el;
       }).catch(() => {
+        isPlaying = false;
         if (audioElement === el) {
+          audioElement.pause();
           audioElement = null;
         }
       });
     } else {
       isPlaying = true;
-      audioElement = el;
     }
-  } catch {}
+  } catch {
+    isPlaying = false;
+  }
 }
 
 function stopPhonk() {
@@ -41,27 +50,27 @@ function stopPhonk() {
 
 export function BackgroundMusic() {
   const started = useRef(false);
-  const userInteracted = useRef(false);
 
   useEffect(() => {
     if (started.current) return;
     started.current = true;
 
+    // Intentar autoplay al entrar
+    startPhonk();
+
+    // Escuchar cambios del SoundToggle
     const unsubscribe = Sound.onChange((isEnabled) => {
       if (isEnabled && !isPlaying) {
         startPhonk();
-      } else if (!isEnabled && isPlaying) {
+      } else if (!isEnabled) {
         stopPhonk();
       }
     });
 
+    // Primer click/touch del usuario inicia si autoplay falló
     const handleInteraction = () => {
-      if (!userInteracted.current) {
-        userInteracted.current = true;
-        startPhonk();
-      }
+      if (!isPlaying) startPhonk();
     };
-
     document.addEventListener("click", handleInteraction);
     document.addEventListener("touchstart", handleInteraction);
 
