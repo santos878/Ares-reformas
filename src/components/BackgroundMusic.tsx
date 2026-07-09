@@ -33,7 +33,12 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    playPhonk();
+    // Sincronizar estado inicial por si Sound ya está en false (localStorage)
+    if (!Sound.isEnabled()) {
+      pausePhonk();
+    } else {
+      playPhonk();
+    }
 
     const unsubscribe = Sound.onChange((enabled) => {
       if (enabled) playPhonk();
