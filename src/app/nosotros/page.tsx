@@ -244,7 +244,7 @@ export default function NosotrosPage() {
               ¿Empezamos tu proyecto?
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-              Presupuesto detallado en 24h. Sin compromiso. Garantía 5 años.
+              Presupuesto detallado en 24h. Sin compromiso.
             </p>
             <Button size="lg" onClick={() => window.location.href = "/presupuesto"}>
               Solicitar Presupuesto <HiArrowRight className="ml-2" />
