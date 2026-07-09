@@ -4,40 +4,23 @@ import { useEffect, useRef } from "react";
 import { Sound } from "@/lib/sound";
 
 let audioElement: HTMLAudioElement | null = null;
-let isPlaying = false;
 
-function startPhonk() {
-  if (isPlaying) return;
-
-  if (audioElement) {
-    audioElement.pause();
-    audioElement = null;
-  }
-
+function playPhonk() {
+  if (audioElement) return;
   try {
     const el = new Audio("/audio/phonk-bg.mp3");
     el.loop = true;
     el.volume = 0.5;
     audioElement = el;
-
-    const promise = el.play();
-    if (promise !== undefined) {
-      promise.then(() => {
-        isPlaying = true;
-      }).catch(() => {
-        if (audioElement === el) {
-          audioElement.pause();
-          audioElement = null;
-        }
-      });
-    } else {
-      isPlaying = true;
-    }
+    el.play().catch(() => {
+      if (audioElement === el) {
+        audioElement = null;
+      }
+    });
   } catch {}
 }
 
 function stopPhonk() {
-  isPlaying = false;
   if (audioElement) {
     audioElement.pause();
     audioElement.currentTime = 0;
@@ -52,27 +35,21 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    startPhonk();
+    playPhonk();
 
-    const unsubscribe = Sound.onChange((isEnabled) => {
-      if (isEnabled) {
-        startPhonk();
-      } else {
-        stopPhonk();
-      }
+    const unsubscribe = Sound.onChange((enabled) => {
+      if (enabled) playPhonk();
+      else stopPhonk();
     });
 
-    const handleInteraction = () => {
-      startPhonk();
-    };
-
-    document.addEventListener("click", handleInteraction);
-    document.addEventListener("touchstart", handleInteraction);
+    const onInteract = () => playPhonk();
+    document.addEventListener("click", onInteract);
+    document.addEventListener("touchstart", onInteract);
 
     return () => {
       unsubscribe();
-      document.removeEventListener("click", handleInteraction);
-      document.removeEventListener("touchstart", handleInteraction);
+      document.removeEventListener("click", onInteract);
+      document.removeEventListener("touchstart", onInteract);
       stopPhonk();
     };
   }, []);
