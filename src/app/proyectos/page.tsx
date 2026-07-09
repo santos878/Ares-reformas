@@ -140,7 +140,7 @@ export default function ProyectosPage() {
           <section className="relative text-center mt-16 rounded-2xl overflow-hidden bg-gradient-to-b from-gray-900 to-black border border-gray-800">
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600607687931-ce8a6c25118c?q=80&w=1200')" }}
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
             <AnimatedSection className="relative px-8 py-16">
