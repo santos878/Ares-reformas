@@ -25,7 +25,6 @@ function startPhonk() {
       promise.then(() => {
         isPlaying = true;
       }).catch(() => {
-        isPlaying = false;
         if (audioElement === el) {
           audioElement.pause();
           audioElement = null;
@@ -34,9 +33,7 @@ function startPhonk() {
     } else {
       isPlaying = true;
     }
-  } catch {
-    isPlaying = false;
-  }
+  } catch {}
 }
 
 function stopPhonk() {
@@ -55,22 +52,20 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    // Intentar autoplay al entrar
     startPhonk();
 
-    // Escuchar cambios del SoundToggle
     const unsubscribe = Sound.onChange((isEnabled) => {
-      if (isEnabled && !isPlaying) {
+      if (isEnabled) {
         startPhonk();
-      } else if (!isEnabled) {
+      } else {
         stopPhonk();
       }
     });
 
-    // Primer click/touch del usuario inicia si autoplay falló
     const handleInteraction = () => {
-      if (!isPlaying) startPhonk();
+      startPhonk();
     };
+
     document.addEventListener("click", handleInteraction);
     document.addEventListener("touchstart", handleInteraction);
 

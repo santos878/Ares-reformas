@@ -16,11 +16,9 @@ export function SoundToggle() {
   const handleToggle = () => {
     toggle();
     const next = !enabled;
+    Sound.setEnabled(next);
     if (next) {
-      // Delay click slightly so Web Audio API starts after unmuting
-      setTimeout(() => {
-        Sound.play("click");
-      }, 50);
+      setTimeout(() => Sound.play("click"), 50);
     }
   };
 
