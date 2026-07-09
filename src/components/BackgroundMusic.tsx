@@ -7,102 +7,69 @@ let audioCtx: AudioContext | null = null;
 let isPlaying = false;
 let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-const lofiProgression = [
-  { chord: [220, 262, 330], bass: 110 },
-  { chord: [294, 349, 440], bass: 147 },
-  { chord: [196, 247, 330], bass: 98 },
-  { chord: [262, 330, 392], bass: 131 },
-  { chord: [175, 220, 262], bass: 87 },
-  { chord: [165, 196, 247], bass: 82 },
-  { chord: [220, 262, 330], bass: 110 },
-  { chord: [294, 349, 440], bass: 147 },
-  { chord: [196, 247, 330], bass: 98 },
-  { chord: [262, 330, 392], bass: 131 },
-  { chord: [175, 220, 262], bass: 87 },
-  { chord: [196, 247, 330], bass: 98 },
+const riffNotes = [
+  { melody: 165, bass: 82 },   // E
+  { melody: 165, bass: 82 },   // E
+  { melody: 196, bass: 98 },   // G
+  { melody: 220, bass: 110 },  // A
+  { melody: 165, bass: 82 },   // E
+  { melody: 247, bass: 123 },  // B
+  { melody: 165, bass: 82 },   // E
+  { melody: 165, bass: 82 },   // E
 ];
 
-const lofiMelody = [
-  440, 494, 523, 494, 440, 392, 440, 494,
-  523, 587, 523, 494, 440, 392, 349, 392,
-  440, 494, 523, 587, 659, 587, 523, 494,
-  440, 392, 349, 330, 349, 392, 440, 392,
-  349, 330, 294, 262, 294, 330, 349, 392,
-  330, 294, 262, 247, 262, 294, 330, 294,
-];
-
-function playLofiChord(notes: number[], ctx: AudioContext, startTime: number) {
-  notes.forEach((freq) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(freq, startTime);
-    gain.gain.setValueAtTime(0.06, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.2);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(startTime);
-    osc.stop(startTime + 1.3);
-  });
-}
-
-function playLofiBass(freq: number, ctx: AudioContext, startTime: number) {
+function playNote(freq: number, ctx: AudioContext, startTime: number, gainLevel: number, type: OscillatorType) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
-  osc.type = "triangle";
+  osc.type = type;
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.08, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+  gain.gain.setValueAtTime(gainLevel, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.9);
+  osc.stop(startTime + 0.35);
 }
 
-function playLofiMelody(freq: number, ctx: AudioContext, startTime: number) {
+function playBassNote(freq: number, ctx: AudioContext, startTime: number) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
-  osc.type = "sine";
+  osc.type = "sawtooth";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.04, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
+  gain.gain.setValueAtTime(0.12, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.6);
+  osc.stop(startTime + 0.3);
 }
 
-function startMelody() {
+function startParanoid() {
   if (isPlaying || !Sound.isEnabled()) return;
 
   try {
     audioCtx = new AudioContext();
     isPlaying = true;
-    let chordIndex = 0;
-    let melodyIndex = 0;
+    let index = 0;
 
     const playBeat = () => {
       if (!audioCtx || !isPlaying) return;
 
       const now = audioCtx.currentTime;
-      const progression = lofiProgression[chordIndex];
+      const note = riffNotes[index];
 
-      playLofiChord(progression.chord, audioCtx, now);
-      playLofiBass(progression.bass, audioCtx, now);
-      playLofiMelody(lofiMelody[melodyIndex], audioCtx, now + 0.15);
+      playNote(note.melody, audioCtx, now, 0.07, "sawtooth");
+      playBassNote(note.bass, audioCtx, now + 0.02);
 
-      chordIndex = (chordIndex + 1) % lofiProgression.length;
-      melodyIndex = (melodyIndex + 1) % lofiMelody.length;
-
-      const nextDelay = 650 + (Math.random() > 0.5 ? 50 : 0);
-      timeoutId = setTimeout(playBeat, nextDelay);
+      index = (index + 1) % riffNotes.length;
+      timeoutId = setTimeout(playBeat, 280);
     };
 
     playBeat();
   } catch {}
 }
 
-function stopMelody() {
+function stopParanoid() {
   isPlaying = false;
   if (timeoutId) {
     clearTimeout(timeoutId);
@@ -121,19 +88,17 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    // Escuchar cambios en el estado del sonido (inmediato, sin polling)
     const unsubscribe = Sound.onChange((isEnabled) => {
       if (isEnabled && !isPlaying) {
-        startMelody();
+        startParanoid();
       } else if (!isEnabled && isPlaying) {
-        stopMelody();
+        stopParanoid();
       }
     });
 
-    // Iniciar con el primer click
     const handleInteraction = () => {
       if (!isPlaying && Sound.isEnabled()) {
-        startMelody();
+        startParanoid();
       }
     };
 
@@ -144,7 +109,7 @@ export function BackgroundMusic() {
       unsubscribe();
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
-      stopMelody();
+      stopParanoid();
     };
   }, []);
 
