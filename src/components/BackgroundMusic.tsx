@@ -3,58 +3,47 @@
 import { useEffect, useRef } from "react";
 import { Sound } from "@/lib/sound";
 
-let audioContext: AudioContext | null = null;
+let audioElement: HTMLAudioElement | null = null;
 let isPlaying = false;
-let currentSource: AudioBufferSourceNode | null = null;
-let gainNode: GainNode | null = null;
-let audioBuffer: AudioBuffer | null = null;
+let isStarting = false;
 
-async function loadAndPlay() {
-  if (isPlaying) return;
+function startPhonk() {
+  if (isPlaying || isStarting) return;
 
+  isStarting = true;
   try {
-    if (!audioContext) {
-      audioContext = new AudioContext();
+    audioElement = new Audio("/audio/phonk-bg.mp3");
+    audioElement.loop = true;
+    audioElement.volume = 0.5;
+    const promise = audioElement.play();
+    if (promise !== undefined) {
+      promise.then(() => {
+        isPlaying = true;
+        isStarting = false;
+      }).catch(() => {
+        isPlaying = false;
+        isStarting = false;
+        if (audioElement) {
+          audioElement.pause();
+          audioElement = null;
+        }
+      });
+    } else {
+      isPlaying = true;
+      isStarting = false;
     }
-    if (audioContext.state === "suspended") {
-      await audioContext.resume();
-    }
-
-    if (!gainNode) {
-      gainNode = audioContext.createGain();
-      gainNode.gain.value = 0.5;
-      gainNode.connect(audioContext.destination);
-    }
-
-    if (!audioBuffer) {
-      const response = await fetch("/audio/phonk-bg.mp3");
-      const arrayBuffer = await response.arrayBuffer();
-      audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    }
-
-    currentSource = audioContext.createBufferSource();
-    currentSource.buffer = audioBuffer;
-    currentSource.loop = true;
-    currentSource.connect(gainNode);
-    currentSource.start();
-    isPlaying = true;
   } catch {
     isPlaying = false;
-    audioContext = null;
-    gainNode = null;
+    isStarting = false;
   }
 }
 
-function stop() {
+function stopPhonk() {
   isPlaying = false;
-  if (currentSource) {
-    try { currentSource.stop(); } catch {}
-    currentSource = null;
-  }
-  if (audioContext) {
-    audioContext.close().catch(() => {});
-    audioContext = null;
-    gainNode = null;
+  if (audioElement) {
+    audioElement.pause();
+    audioElement.currentTime = 0;
+    audioElement = null;
   }
 }
 
@@ -65,18 +54,21 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    loadAndPlay();
+    // Intentar autoplay inmediatamente
+    startPhonk();
 
+    // Sincronizar con toggle de sonido
     const unsubscribe = Sound.onChange((isEnabled) => {
       if (isEnabled && !isPlaying) {
-        loadAndPlay();
+        startPhonk();
       } else if (!isEnabled && isPlaying) {
-        stop();
+        stopPhonk();
       }
     });
 
+    // Al hacer click/touch en cualquier parte
     const handleInteraction = () => {
-      if (!isPlaying) loadAndPlay();
+      if (!isPlaying) startPhonk();
     };
 
     document.addEventListener("click", handleInteraction);
@@ -86,7 +78,7 @@ export function BackgroundMusic() {
       unsubscribe();
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
-      stop();
+      stopPhonk();
     };
   }, []);
 
