@@ -5,18 +5,37 @@ import { Sound } from "@/lib/sound";
 
 let audioElement: HTMLAudioElement | null = null;
 let isPlaying = false;
-let retryCount = 0;
+let isStarting = false;
 
 function startPhonk() {
-  if (isPlaying || !Sound.isEnabled()) return;
+  if (isPlaying || isStarting || !Sound.isEnabled()) return;
 
+  isStarting = true;
   try {
     audioElement = new Audio("https://cdn.pixabay.com/download/audio/2026/06/21/audio_f600ffefcb.mp3?filename=apalonbeats-phonk-music-phonk-549460.mp3");
     audioElement.loop = true;
     audioElement.volume = 0.5;
-    audioElement.play().catch(() => {});
-    isPlaying = true;
-  } catch {}
+    const promise = audioElement.play();
+    if (promise !== undefined) {
+      promise.then(() => {
+        isPlaying = true;
+        isStarting = false;
+      }).catch(() => {
+        isPlaying = false;
+        isStarting = false;
+        if (audioElement) {
+          audioElement.pause();
+          audioElement = null;
+        }
+      });
+    } else {
+      isPlaying = true;
+      isStarting = false;
+    }
+  } catch {
+    isPlaying = false;
+    isStarting = false;
+  }
 }
 
 function stopPhonk() {
@@ -43,31 +62,19 @@ export function BackgroundMusic() {
       }
     });
 
-    // Intentar autoplay inmediatamente
+    // Intentar autoplay
     if (Sound.isEnabled() && !isPlaying) startPhonk();
-
-    // Reintentar hasta que funcione (máx 5 intentos)
-    const retryInterval = setInterval(() => {
-      if (retryCount >= 5 || isPlaying) {
-        clearInterval(retryInterval);
-        return;
-      }
-      retryCount++;
-      if (Sound.isEnabled() && !isPlaying) startPhonk();
-    }, 800);
 
     // Fallback: al hacer click/touch
     const handleInteraction = () => {
-      clearInterval(retryInterval);
       if (!isPlaying && Sound.isEnabled()) startPhonk();
     };
 
-    document.addEventListener("click", handleInteraction, { once: true });
-    document.addEventListener("touchstart", handleInteraction, { once: true });
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("touchstart", handleInteraction);
 
     return () => {
       unsubscribe();
-      clearInterval(retryInterval);
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
       stopPhonk();
