@@ -66,7 +66,7 @@ export function Footer() {
           <AnimatedSection delay={0.3}>
             <h3 className="text-white font-bold text-lg mb-4">Síguenos</h3>
             <div className="flex gap-3">
-              <a href="https://instagram.com/ares_reformas" target="_blank" rel="noopener noreferrer" onMouseEnter={() => Sound.play("hover")} onClick={() => Sound.play("click")} className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
+              <a href="https://www.instagram.com/ares_reformas_" target="_blank" rel="noopener noreferrer" onMouseEnter={() => Sound.play("hover")} onClick={() => Sound.play("click")} className="p-3 bg-gray-900 hover:bg-red-600 rounded-lg text-gray-400 hover:text-white transition-all">
                 <FaInstagram size={20} />
               </a>
             </div>
