@@ -16,9 +16,10 @@ export function SoundToggle() {
   const handleToggle = () => {
     toggle();
     const next = !enabled;
-    Sound.setEnabled(next);
     if (next) {
-      setTimeout(() => Sound.play("click"), 50);
+      setTimeout(() => {
+        Sound.play("click");
+      }, 50);
     }
   };
 
