@@ -24,11 +24,11 @@ function playNote(freq: number, ctx: AudioContext, startTime: number, gainLevel:
   osc.type = type;
   osc.frequency.setValueAtTime(freq, startTime);
   gain.gain.setValueAtTime(gainLevel, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.35);
+  osc.stop(startTime + 0.4);
 }
 
 function playBassNote(freq: number, ctx: AudioContext, startTime: number) {
@@ -36,12 +36,12 @@ function playBassNote(freq: number, ctx: AudioContext, startTime: number) {
   const gain = ctx.createGain();
   osc.type = "sawtooth";
   osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.12, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+  gain.gain.setValueAtTime(0.2, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(startTime);
-  osc.stop(startTime + 0.3);
+  osc.stop(startTime + 0.35);
 }
 
 function startParanoid() {
@@ -49,6 +49,10 @@ function startParanoid() {
 
   try {
     audioCtx = new AudioContext();
+    // Intentar resume en móvil
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
     isPlaying = true;
     let index = 0;
 
@@ -58,7 +62,7 @@ function startParanoid() {
       const now = audioCtx.currentTime;
       const note = riffNotes[index];
 
-      playNote(note.melody, audioCtx, now, 0.07, "sawtooth");
+      playNote(note.melody, audioCtx, now, 0.15, "sawtooth");
       playBassNote(note.bass, audioCtx, now + 0.02);
 
       index = (index + 1) % riffNotes.length;
