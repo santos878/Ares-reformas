@@ -34,12 +34,7 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    // Estado inicial
-    if (!Sound.isEnabled()) {
-      pausePhonk();
-    } else {
-      playPhonk();
-    }
+    // No autoplay - solo reproducir con interacción del usuario
 
     const unsubscribe = Sound.onChange((enabled) => {
       if (enabled === lastEnabled.current) return;
