@@ -195,66 +195,112 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="relative py-24">
+      {/* Experiencia + Talento Joven */}
+      <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-red-600/5 to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-red-600/5 rounded-full blur-3xl" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
             <span className="text-red-500 font-semibold tracking-[0.3em] uppercase text-sm">
-              Testimonios reales
+              Nuestra filosofía
             </span>
             <h2 className="text-4xl sm:text-5xl font-black text-white mt-4">
-              Lo que dicen <span className="text-red-500">nuestros clientes</span>
+              Donde la <span className="text-red-500">experiencia</span> encuentra al <span className="text-red-500">talento</span>
             </h2>
-            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-              Más de 250 proyectos. Estas son algunas voces.
+            <p className="text-gray-400 text-lg mt-4 max-w-3xl mx-auto leading-relaxed">
+              En Ares Reformas creemos en el equilibrio: nuestros maestros con años de oficio 
+              enseñan y guían a jóvenes que empiezan. Así garantizamos calidad impecable 
+              y damos la primera oportunidad a quien merece crecer.
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, i) => (
-              <AnimatedSection key={testimonial.name} delay={i * 0.08} variant="up">
-                <motion.article
-                  whileHover={{ y: -6 }}
-                  onMouseEnter={() => Sound.play("hover")}
-                  className="h-full p-8 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/30 transition-all duration-500 flex flex-col"
-                >
-                  <div className="flex items-center gap-1 mb-4">
-                    {Array.from({ length: testimonial.rating }).map((_, idx) => (
-                      <HiStar key={idx} className="text-yellow-400" size={20} />
-                    ))}
-                  </div>
-                  <p className="text-gray-300 leading-relaxed mb-6 flex-1">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="border-t border-gray-800 pt-4">
-                    <p className="font-bold text-white">{testimonial.name}</p>
-                    <p className="text-gray-500 text-sm">{testimonial.location} · {testimonial.project}</p>
-                  </div>
-                </motion.article>
-              </AnimatedSection>
+          {/* Stats Row */}
+          <AnimatedSection className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            {[
+              { number: "+5", label: "Años de experiencia" },
+              { number: "250+", label: "Proyectos realizados" },
+              { number: "12+", label: "Jóvenes formados" },
+              { number: "97%", label: "Clientes satisfechos" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                onMouseEnter={() => Sound.play("hover")}
+                className="group text-center p-6 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-300"
+              >
+                <p className="text-4xl sm:text-5xl font-black text-red-500 group-hover:scale-110 transition-transform">
+                  {stat.number}
+                </p>
+                <p className="text-gray-400 text-sm mt-2">{stat.label}</p>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
+          </AnimatedSection>
 
-      {/* CTA */}
-      <section className="relative py-24">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-6">
-              ¿Empezamos tu proyecto?
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-              Presupuesto detallado en 24h. Sin compromiso.
-            </p>
-            <Button size="lg" onClick={() => window.location.href = "/presupuesto"}>
-              Solicitar Presupuesto <HiArrowRight className="ml-2" />
-            </Button>
+          {/* Two Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AnimatedSection delay={0.1} variant="up">
+              <motion.article
+                whileHover={{ y: -8 }}
+                onMouseEnter={() => Sound.play("hover")}
+                className="group relative h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500 overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-40 h-40 bg-red-600/10 rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center mb-6 text-red-400 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                    <HiShieldCheck size={32} />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 group-hover:text-red-400 transition-colors">
+                    Profesionales <span className="text-red-500">experimentados</span>
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Maestros con más de 5 años de oficio que dominan cada fase: 
+                    demolición, fontanería, electricidad, albañilería, carpintería y acabados. 
+                    Saben lo que funciona y lo que no. Calidad garantizada.
+                  </p>
+                </div>
+              </motion.article>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.2} variant="up">
+              <motion.article
+                whileHover={{ y: -8 }}
+                onMouseEnter={() => Sound.play("hover")}
+                className="group relative h-full p-8 sm:p-10 rounded-2xl bg-gradient-to-b from-gray-900/80 to-black/90 border border-gray-800 hover:border-red-600/50 transition-all duration-500 overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-40 h-40 bg-green-600/10 rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-green-600/20 rounded-2xl flex items-center justify-center mb-6 text-green-400 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+                    <HiSparkles size={32} />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 group-hover:text-green-400 transition-colors">
+                    Jóvenes <span className="text-green-400">talento</span>
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    Les damos su primera oportunidad real. Aprenden con los mejores, 
+                    se forman en obra y crecen con nosotros. Ganas, frescura y compromiso. 
+                    Apostar por ellos es apostar por el futuro de la profesión.
+                  </p>
+                </div>
+              </motion.article>
+            </AnimatedSection>
+          </div>
+
+          {/* Bottom message */}
+          <AnimatedSection delay={0.4} className="mt-12 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-gradient-to-r from-red-600/10 to-green-600/10 border border-red-600/20">
+              <HiHeart className="text-red-400 size-5" />
+              <p className="text-gray-300 text-sm sm:text-base">
+                <span className="font-bold text-white">+20 profesionales</span> entre veteranos y aprendices. 
+                Un equipo que crece contigo.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Nationalities */}
     </>
   );
 }
