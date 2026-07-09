@@ -28,12 +28,13 @@ function pausePhonk() {
 
 export function BackgroundMusic() {
   const started = useRef(false);
+  const lastEnabled = useRef(Sound.isEnabled());
 
   useEffect(() => {
     if (started.current) return;
     started.current = true;
 
-    // Sincronizar estado inicial por si Sound ya está en false (localStorage)
+    // Estado inicial
     if (!Sound.isEnabled()) {
       pausePhonk();
     } else {
@@ -41,6 +42,8 @@ export function BackgroundMusic() {
     }
 
     const unsubscribe = Sound.onChange((enabled) => {
+      if (enabled === lastEnabled.current) return;
+      lastEnabled.current = enabled;
       if (enabled) playPhonk();
       else pausePhonk();
     });
