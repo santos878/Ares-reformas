@@ -3,85 +3,27 @@
 import { useEffect, useRef } from "react";
 import { Sound } from "@/lib/sound";
 
-let audioCtx: AudioContext | null = null;
+let audioElement: HTMLAudioElement | null = null;
 let isPlaying = false;
-let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-const riffNotes = [
-  { melody: 165, bass: 82 },   // E
-  { melody: 165, bass: 82 },   // E
-  { melody: 196, bass: 98 },   // G
-  { melody: 220, bass: 110 },  // A
-  { melody: 165, bass: 82 },   // E
-  { melody: 247, bass: 123 },  // B
-  { melody: 165, bass: 82 },   // E
-  { melody: 165, bass: 82 },   // E
-];
-
-function playNote(freq: number, ctx: AudioContext, startTime: number, gainLevel: number, type: OscillatorType) {
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = type;
-  osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(gainLevel, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(startTime);
-  osc.stop(startTime + 0.4);
-}
-
-function playBassNote(freq: number, ctx: AudioContext, startTime: number) {
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = "sawtooth";
-  osc.frequency.setValueAtTime(freq, startTime);
-  gain.gain.setValueAtTime(0.2, startTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(startTime);
-  osc.stop(startTime + 0.35);
-}
-
-function startParanoid() {
+function startPhonk() {
   if (isPlaying || !Sound.isEnabled()) return;
 
   try {
-    audioCtx = new AudioContext();
-    // Intentar resume en móvil
-    if (audioCtx.state === "suspended") {
-      audioCtx.resume();
-    }
+    audioElement = new Audio("https://cdn.pixabay.com/download/audio/2026/06/21/audio_f600ffefcb.mp3?filename=apalonbeats-phonk-music-phonk-549460.mp3");
+    audioElement.loop = true;
+    audioElement.volume = 0.5;
+    audioElement.play().catch(() => {});
     isPlaying = true;
-    let index = 0;
-
-    const playBeat = () => {
-      if (!audioCtx || !isPlaying) return;
-
-      const now = audioCtx.currentTime;
-      const note = riffNotes[index];
-
-      playNote(note.melody, audioCtx, now, 0.15, "sawtooth");
-      playBassNote(note.bass, audioCtx, now + 0.02);
-
-      index = (index + 1) % riffNotes.length;
-      timeoutId = setTimeout(playBeat, 280);
-    };
-
-    playBeat();
   } catch {}
 }
 
-function stopParanoid() {
+function stopPhonk() {
   isPlaying = false;
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-    timeoutId = null;
-  }
-  if (audioCtx) {
-    audioCtx.close().catch(() => {});
-    audioCtx = null;
+  if (audioElement) {
+    audioElement.pause();
+    audioElement.currentTime = 0;
+    audioElement = null;
   }
 }
 
@@ -94,15 +36,15 @@ export function BackgroundMusic() {
 
     const unsubscribe = Sound.onChange((isEnabled) => {
       if (isEnabled && !isPlaying) {
-        startParanoid();
+        startPhonk();
       } else if (!isEnabled && isPlaying) {
-        stopParanoid();
+        stopPhonk();
       }
     });
 
     const handleInteraction = () => {
       if (!isPlaying && Sound.isEnabled()) {
-        startParanoid();
+        startPhonk();
       }
     };
 
@@ -113,7 +55,7 @@ export function BackgroundMusic() {
       unsubscribe();
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
-      stopParanoid();
+      stopPhonk();
     };
   }, []);
 
