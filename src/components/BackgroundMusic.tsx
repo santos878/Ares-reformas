@@ -27,7 +27,7 @@ async function loadAndPlay() {
     }
 
     if (!audioBuffer) {
-      const response = await fetch("https://cdn.pixabay.com/download/audio/2026/06/21/audio_f600ffefcb.mp3?filename=apalonbeats-phonk-music-phonk-549460.mp3");
+      const response = await fetch("/audio/phonk-bg.mp3");
       const arrayBuffer = await response.arrayBuffer();
       audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
     }
