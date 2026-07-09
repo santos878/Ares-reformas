@@ -13,9 +13,11 @@ export function SoundToggle() {
     Sound.setEnabled(enabled);
   }, [enabled]);
 
-  const handleToggle = () => {
-    toggle();
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const next = !enabled;
+    toggle();
+    Sound.setEnabled(next);
     if (next) {
       setTimeout(() => {
         Sound.play("click");

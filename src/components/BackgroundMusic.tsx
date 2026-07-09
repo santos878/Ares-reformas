@@ -45,7 +45,10 @@ export function BackgroundMusic() {
       else pausePhonk();
     });
 
-    const onInteract = () => playPhonk();
+    const onInteract = (e: Event) => {
+      if ((e.target as HTMLElement).closest("[aria-label*='sonido']")) return;
+      playPhonk();
+    };
     document.addEventListener("click", onInteract);
     document.addEventListener("touchstart", onInteract);
 
