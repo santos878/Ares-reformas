@@ -18,11 +18,6 @@ export function SoundToggle() {
     const next = !enabled;
     toggle();
     Sound.setEnabled(next);
-    if (next) {
-      setTimeout(() => {
-        Sound.play("click");
-      }, 50);
-    }
   };
 
   return (
