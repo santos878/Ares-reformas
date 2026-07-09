@@ -5,6 +5,7 @@ import { Sound } from "@/lib/sound";
 
 let audioElement: HTMLAudioElement | null = null;
 let isPlaying = false;
+let retryCount = 0;
 
 function startPhonk() {
   if (isPlaying || !Sound.isEnabled()) return;
@@ -42,10 +43,23 @@ export function BackgroundMusic() {
       }
     });
 
-    const handleInteraction = () => {
-      if (!isPlaying && Sound.isEnabled()) {
-        startPhonk();
+    // Intentar autoplay inmediatamente
+    if (Sound.isEnabled() && !isPlaying) startPhonk();
+
+    // Reintentar hasta que funcione (máx 5 intentos)
+    const retryInterval = setInterval(() => {
+      if (retryCount >= 5 || isPlaying) {
+        clearInterval(retryInterval);
+        return;
       }
+      retryCount++;
+      if (Sound.isEnabled() && !isPlaying) startPhonk();
+    }, 800);
+
+    // Fallback: al hacer click/touch
+    const handleInteraction = () => {
+      clearInterval(retryInterval);
+      if (!isPlaying && Sound.isEnabled()) startPhonk();
     };
 
     document.addEventListener("click", handleInteraction, { once: true });
@@ -53,6 +67,7 @@ export function BackgroundMusic() {
 
     return () => {
       unsubscribe();
+      clearInterval(retryInterval);
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
       stopPhonk();
