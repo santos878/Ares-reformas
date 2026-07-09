@@ -5,26 +5,24 @@ import { Sound } from "@/lib/sound";
 
 let audioElement: HTMLAudioElement | null = null;
 
-function playPhonk() {
-  if (audioElement) return;
-  try {
+function ensureAudio() {
+  if (!audioElement) {
     const el = new Audio("/audio/phonk-bg.mp3");
     el.loop = true;
     el.volume = 0.5;
     audioElement = el;
-    el.play().catch(() => {
-      if (audioElement === el) {
-        audioElement = null;
-      }
-    });
-  } catch {}
+  }
+  return audioElement;
 }
 
-function stopPhonk() {
+function playPhonk() {
+  const el = ensureAudio();
+  el.play().catch(() => {});
+}
+
+function pausePhonk() {
   if (audioElement) {
     audioElement.pause();
-    audioElement.currentTime = 0;
-    audioElement = null;
   }
 }
 
@@ -39,7 +37,7 @@ export function BackgroundMusic() {
 
     const unsubscribe = Sound.onChange((enabled) => {
       if (enabled) playPhonk();
-      else stopPhonk();
+      else pausePhonk();
     });
 
     const onInteract = () => playPhonk();
@@ -50,7 +48,7 @@ export function BackgroundMusic() {
       unsubscribe();
       document.removeEventListener("click", onInteract);
       document.removeEventListener("touchstart", onInteract);
-      stopPhonk();
+      pausePhonk();
     };
   }, []);
 
