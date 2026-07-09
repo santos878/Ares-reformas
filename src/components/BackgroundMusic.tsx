@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Sound } from "@/lib/sound";
 
 let audioElement: HTMLAudioElement | null = null;
 let isPlaying = false;
 
-function startMusic() {
+function startPhonk() {
   if (isPlaying) return;
 
   try {
@@ -23,7 +24,7 @@ function startMusic() {
   }
 }
 
-function stopMusic() {
+function stopPhonk() {
   isPlaying = false;
   if (audioElement) {
     audioElement.pause();
@@ -39,17 +40,28 @@ export function BackgroundMusic() {
     if (started.current) return;
     started.current = true;
 
-    startMusic();
+    startPhonk();
 
-    document.addEventListener("click", () => {
-      if (!isPlaying) startMusic();
+    const unsubscribe = Sound.onChange((isEnabled) => {
+      if (isEnabled && !isPlaying) {
+        startPhonk();
+      } else if (!isEnabled && isPlaying) {
+        stopPhonk();
+      }
     });
-    document.addEventListener("touchstart", () => {
-      if (!isPlaying) startMusic();
-    });
+
+    const handleInteraction = () => {
+      if (!isPlaying) startPhonk();
+    };
+
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("touchstart", handleInteraction);
 
     return () => {
-      stopMusic();
+      unsubscribe();
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
+      stopPhonk();
     };
   }, []);
 
