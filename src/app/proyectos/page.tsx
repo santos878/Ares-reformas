@@ -16,6 +16,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Reforma de salón con suelo laminado", category: "Alicatados y Solados", location: "Getxo", area: "18m²", desc: "Cambio de suelo terrazo por laminado de roble, pintura completa de paredes y techo.", image: "https://i.imgur.com/WeeeA0a.png", imageAfter: "https://i.imgur.com/WQuYeJO.png" },
   { title: "Reforma integral de piso", category: "Reformas Integrales", location: "Bilbao", area: "45m²", desc: "Reforma completa: suelo laminado, pintura de paredes y techo, molduras, iluminación empotrada, recorte de puertas.", image: "https://i.imgur.com/sCtnG1r.png", imageAfter: "https://i.imgur.com/52ItiuJ.png" },
   { title: "Reforma de cocina", category: "Baños y Cocinas", location: "Barakaldo", area: "9m²", desc: "Reforma completa: nuevos armarios, encimera, porcelánico gran formato, grifería moderna y fregadero bajo encimera.", image: "https://i.imgur.com/WFZgxB7.png", imageAfter: "https://i.imgur.com/RgZbPbM.png" },
+  { title: "Cambiar bañera por plato de ducha", category: "Baños y Cocinas", location: "Aperribay", area: "4m²", desc: "Cambio de bañera por plato de ducha, lavabo con mueble y mampara.", image: "https://i.imgur.com/R5uzAcQ.jpeg", imageAfter: "https://i.imgur.com/9L2DT3Q.jpeg" },
 ];
 
 export default function ProyectosPage() {
