@@ -17,6 +17,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Reforma integral de piso", category: "Reformas Integrales", location: "Bilbao", area: "45m²", desc: "Reforma completa: suelo laminado, pintura de paredes y techo, molduras, iluminación empotrada, recorte de puertas.", image: "https://i.imgur.com/sCtnG1r.png", imageAfter: "https://i.imgur.com/52ItiuJ.png" },
   { title: "Reforma de cocina", category: "Baños y Cocinas", location: "Barakaldo", area: "9m²", desc: "Reforma completa: nuevos armarios, encimera, porcelánico gran formato, grifería moderna y fregadero bajo encimera.", image: "https://i.imgur.com/WFZgxB7.png", imageAfter: "https://i.imgur.com/RgZbPbM.png" },
   { title: "Cambiar bañera por plato de ducha", category: "Baños y Cocinas", location: "Aperribay", area: "4m²", desc: "Cambio de bañera por plato de ducha, lavabo con mueble y mampara.", image: "https://i.imgur.com/9L2DT3Q.jpeg", imageAfter: "https://i.imgur.com/R5uzAcQ.jpeg" },
+  { title: "Cambiar plato de ducha viejo por nuevo", category: "Baños y Cocinas", location: "Basauri", area: "3m²", desc: "Cambio de plato de ducha viejo por plato de ducha nuevo.", image: "https://i.imgur.com/wAiyosZ.jpeg", imageAfter: "https://i.imgur.com/rSJhUJY.jpeg" },
 ];
 
 export default function ProyectosPage() {
