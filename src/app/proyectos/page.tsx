@@ -23,6 +23,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Casetón en terraza baja", category: "Alicatados y Solados", location: "Etxebarri", area: "10m²", desc: "Casetón en terraza baja con acabados de solado.", image: "https://i.imgur.com/yA0srRb.jpeg", imageAfter: "https://i.imgur.com/iAH2qxP.jpeg" },
   { title: "Reforma caserío - terraza con muro de bloque", category: "Reformas Integrales", location: "Galdakao", area: "20m²", desc: "Rebajado de tierra en la parte trasera del caserío para crear una terraza con muro de bloque visto.", image: "https://i.imgur.com/8QB9UnS.jpeg", imageAfter: "https://i.imgur.com/XpQzIzn.jpeg" },
   { title: "Cambiar plato de ducha viejo por nuevo", category: "Baños y Cocinas", location: "Galdakao", area: "3m²", desc: "Cambio de plato de ducha viejo por plato de ducha nuevo.", image: "https://i.imgur.com/Sjnk6KE.jpeg", imageAfter: "https://i.imgur.com/exeYtr9.jpeg" },
+  { title: "Colocar plato de ducha y mampara", category: "Baños y Cocinas", location: "Bilbao", area: "4m²", desc: "Colocación de plato de ducha y mampara.", image: "https://i.imgur.com/3NqH3ws.jpeg", imageAfter: "https://i.imgur.com/oYuPpg0.jpeg" },
 ];
 
 export default function ProyectosPage() {
