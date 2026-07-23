@@ -20,6 +20,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Cambiar plato de ducha viejo por nuevo", category: "Baños y Cocinas", location: "Basauri", area: "3m²", desc: "Cambio de plato de ducha viejo por plato de ducha nuevo.", image: "https://i.imgur.com/wAiyosZ.jpeg", imageAfter: "https://i.imgur.com/rSJhUJY.jpeg" },
   { title: "Baño moderno completo", category: "Baños y Cocinas", location: "Irún", area: "6m²", desc: "Reforma completa de toda la estructura del baño con acabados modernos.", image: "https://i.imgur.com/hsKe3k3.jpeg", imageAfter: "https://i.imgur.com/33lx71U.jpeg" },
   { title: "Cambiar bañera por plato de ducha y fontanería", category: "Baños y Cocinas", location: "Miravalles", area: "5m²", desc: "Cambio de bañera por plato de ducha con reparación de fontanería completa.", image: "https://i.imgur.com/UjIt40x.jpeg", imageAfter: "https://i.imgur.com/OPinLDO.jpeg" },
+  { title: "Casetón en terraza baja", category: "Alicatados y Solados", location: "Etxebarri", area: "10m²", desc: "Casetón en terraza baja con acabados de solado.", image: "https://i.imgur.com/yA0srRb.jpeg", imageAfter: "https://i.imgur.com/iAH2qxP.jpeg" },
 ];
 
 export default function ProyectosPage() {
