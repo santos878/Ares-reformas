@@ -12,8 +12,6 @@ import { Sound } from "@/lib/sound";
 const categories = ["Todos", "Baños y Cocinas", "Alicatados y Solados", "Pladur y Techos", "Pintura", "Reformas Integrales"];
 
 const projects: { title: string; category: string; location: string; area: string; desc: string; image: string; imageAfter?: string }[] = [
-  { title: "Reforma integral de piso", category: "Reformas Integrales", location: "Bilbao", area: "45m²", desc: "Reforma completa: suelo laminado, pintura de paredes y techo, molduras, iluminación empotrada, recorte de puertas.", image: "https://i.imgur.com/sCtnG1r.png", imageAfter: "https://i.imgur.com/52ItiuJ.png" },
-  { title: "Reforma de cocina", category: "Baños y Cocinas", location: "Barakaldo", area: "9m²", desc: "Reforma completa: nuevos armarios, encimera, porcelánico gran formato, grifería moderna y fregadero bajo encimera.", image: "https://i.imgur.com/WFZgxB7.png", imageAfter: "https://i.imgur.com/RgZbPbM.png" },
   { title: "Cambiar bañera por plato de ducha", category: "Baños y Cocinas", location: "Aperribay", area: "4m²", desc: "Cambio de bañera por plato de ducha, lavabo con mueble y mampara.", image: "https://i.imgur.com/9L2DT3Q.jpeg", imageAfter: "https://i.imgur.com/R5uzAcQ.jpeg" },
   { title: "Cambiar plato de ducha viejo por nuevo", category: "Baños y Cocinas", location: "Basauri", area: "3m²", desc: "Cambio de plato de ducha viejo por plato de ducha nuevo.", image: "https://i.imgur.com/wAiyosZ.jpeg", imageAfter: "https://i.imgur.com/rSJhUJY.jpeg" },
   { title: "Baño moderno completo", category: "Baños y Cocinas", location: "Irún", area: "6m²", desc: "Reforma completa de toda la estructura del baño con acabados modernos.", image: "https://i.imgur.com/hsKe3k3.jpeg", imageAfter: "https://i.imgur.com/33lx71U.jpeg" },
