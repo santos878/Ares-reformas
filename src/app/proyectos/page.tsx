@@ -20,7 +20,7 @@ const projects: { title: string; category: string; location: string; area: strin
   { title: "Reforma caserío - terraza con muro de bloque", category: "Reformas Integrales", location: "Galdakao", area: "20m²", desc: "Rebajado de tierra en la parte trasera del caserío para crear una terraza con muro de bloque visto.", image: "https://i.imgur.com/8QB9UnS.jpeg", imageAfter: "https://i.imgur.com/XpQzIzn.jpeg" },
   { title: "Cambiar plato de ducha viejo por nuevo", category: "Baños y Cocinas", location: "Galdakao", area: "3m²", desc: "Cambio de plato de ducha viejo por plato de ducha nuevo.", image: "https://i.imgur.com/Sjnk6KE.jpeg", imageAfter: "https://i.imgur.com/exeYtr9.jpeg" },
   { title: "Colocar plato de ducha y mampara", category: "Baños y Cocinas", location: "Bilbao", area: "4m²", desc: "Colocación de plato de ducha y mampara.", image: "https://i.imgur.com/3NqH3ws.jpeg", imageAfter: "https://i.imgur.com/oYuPpg0.jpeg" },
-  { title: "Pintando y reparando techo y terrazas", category: "Pintura", location: "Plentzia", area: "—", desc: "Pintura y reparación de techo y terrazas.", image: "/projects/plentzia_antes.png", imageAfter: "/projects/plentzia_despues.png" },
+  { title: "Pintando y reparando techo y terrazas", category: "Pladur y Techos", location: "Plentzia", area: "—", desc: "Pintura y reparación de techo y terrazas.", image: "/projects/plentzia_antes.png", imageAfter: "/projects/plentzia_despues.png" },
 ];
 
 export default function ProyectosPage() {
